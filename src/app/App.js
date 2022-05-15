@@ -2,10 +2,12 @@ import * as React from 'react';
 import { MovieBuffLogo } from '../component/MovieBuffLogo';
 import { ThemeProvider } from '@mui/material';
 import { theme } from './MuiAppTheme';
+import CssBaseline from '@mui/material/CssBaseline';
 
 export const App = () => {
   return (
     <ThemeProvider theme={theme}>
+      <CssBaseline />
       <div>
         <MovieBuffLogo width='200' height='200' />
         <h1>Movie Buff App</h1>

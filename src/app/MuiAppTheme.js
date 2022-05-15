@@ -4,10 +4,18 @@ import '../app/styles.css';
 export const theme = createTheme({
   palette: {
     primary: {
-      main: '#74006f',
+      main: '#2d4452',
     },
     secondary: {
-      main: '#ff4f00',
+      main: '#b314e8',
+    },
+    background: {
+      default: '#edf5ed',
+      paper: '#f3f9f9',
+    },
+    type: 'light',
+    info: {
+      main: '#2196f3',
     },
   },
   spacing: 8,
