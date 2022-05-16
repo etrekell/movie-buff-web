@@ -4,7 +4,7 @@ import { theme } from './MuiAppTheme';
 import { MovieBuffLogo } from '../components/MovieBuffLogo';
 import { ThemeProvider, Typography, Button, Stack } from '@mui/material';
 import { useState } from 'react';
-import { LoginDialog } from '../components/LoginDialog';
+import { LoginFormDialog } from '../components/LoginFormDialog';
 
 export const App = () => {
   const [showDialog, setShowDialog] = useState('none');
@@ -42,17 +42,17 @@ export const App = () => {
           </Button>
         </Stack>
       </div>
-      <LoginDialog
+      <LoginFormDialog
         dialogType='login'
         showDialog={showDialog === 'login'}
         setOpenDialog={setShowDialog}
-        handleSubmit={login}
+        onSubmit={login}
       />
-      <LoginDialog
+      <LoginFormDialog
         dialogType='register'
         showDialog={showDialog === 'register'}
         setOpenDialog={setShowDialog}
-        handleSubmit={register}
+        onSubmit={register}
       />
     </ThemeProvider>
   );
