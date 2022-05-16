@@ -21,7 +21,7 @@ export const LoginForm = ({ onSubmit, buttonText }) => {
           <input id='password' type='password' />
         </div>
         <div>
-          <Button type='submit' variant='outlined'>
+          <Button type='submit' variant='contained' color='primary'>
             {buttonText}
           </Button>
         </div>
