@@ -26,7 +26,7 @@ export const App = () => {
     console.log('register', formData);
   };
 
-  const landingStyle = {
+  const landingPageStyle = {
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'center',
@@ -39,7 +39,7 @@ export const App = () => {
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline />
-      <div style={landingStyle}>
+      <div style={landingPageStyle}>
         <MovieBuffLogo width='250' height='250' />
         <Typography variant='h1'>Movie Buff</Typography>
         <Stack spacing={2} direction='row' style={{ padding: '20px' }}>
