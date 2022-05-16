@@ -1,8 +1,20 @@
-import React from 'react';
-import { Button, Dialog, DialogActions, DialogContent, DialogTitle, TextField } from '@mui/material';
+import React, { useState } from 'react';
+import {
+  Button,
+  Dialog,
+  DialogActions,
+  DialogContent,
+  DialogTitle,
+  IconButton,
+  InputAdornment,
+  TextField,
+} from '@mui/material';
+import Visibility from '@mui/icons-material/Visibility';
+import VisibilityOff from '@mui/icons-material/VisibilityOff';
 
 export const LoginFormDialog = ({ dialogType, showDialog, setOpenDialog, onSubmit }) => {
   const dialogTitle = dialogType.charAt(0).toUpperCase() + dialogType.slice(1);
+  const [showPassword, setShowPassword] = useState(false);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -16,20 +28,39 @@ export const LoginFormDialog = ({ dialogType, showDialog, setOpenDialog, onSubmi
       <form onSubmit={handleSubmit}>
         <DialogTitle id='dialog-title'>{dialogTitle}</DialogTitle>
         <DialogContent>
-          <div>
-            <TextField
-              autoFocus
-              id='username'
-              label='Username'
-              variant='outlined'
-              size='small'
-              margin='dense'
-              type='text'
-            />
-          </div>
-          <div>
-            <TextField id='password' label='Password' variant='outlined' size='small' margin='dense' type='password' />
-          </div>
+          <TextField
+            fullWidth
+            autoFocus
+            id='username'
+            label='Username'
+            variant='outlined'
+            size='small'
+            margin='dense'
+            type='text'
+            required
+          />
+          <TextField
+            fullWidth
+            id='password'
+            label='Password'
+            variant='outlined'
+            size='small'
+            margin='dense'
+            type={showPassword ? 'text' : 'password'}
+            required
+            InputProps={{
+              endAdornment: (
+                <InputAdornment position='end'>
+                  <IconButton
+                    aria-label='toggle password visibility'
+                    onClick={() => setShowPassword((prevState) => !prevState)}
+                    edge='end'>
+                    {showPassword ? <VisibilityOff /> : <Visibility />}
+                  </IconButton>
+                </InputAdornment>
+              ),
+            }}
+          />
         </DialogContent>
         <DialogActions>
           <Button type='submit' variant='contained'>
