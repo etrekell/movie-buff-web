@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Stack, TextField, Typography } from '@mui/material';
 import { MovieInfoCard } from './MovieInfoCard';
+import { tmdbFetch } from '../utlities/tmdbFetch';
 
 export const DiscoverPage = () => {
   const [status, setStatus] = useState('idle');
@@ -22,16 +23,8 @@ export const DiscoverPage = () => {
       return;
     }
     setStatus('loading');
-    fetch(
-      // This is the proper way to store api keys, they are in the .env file which is listed in the gitignore so
-      // that it is not tracked.
-      // encodeURIComponent properly serializes strings to be used in a URL, For example, it replaces strings with "%20"
-      `${process.env.REACT_APP_TMDB_API_BASE_URL}/search/movie?api_key=${
-        process.env.REACT_APP_TMDB_API_KEY
-      }&language=en-US&query=${encodeURIComponent(query)}&page=1&include_adult=false`
-    )
-      // once the promise from the initial call resolves, we get the json out of that response object
-      .then((response) => response.json())
+    // pulled the fetch function out into a util to make it a reusable api client
+    tmdbFetch(`&language=en-US&query=${encodeURIComponent(query)}&page=1&include_adult=false`)
       // once the response.json promise resolves, we take out out the response data...
       .then((responseData) => {
         // and store it in state
