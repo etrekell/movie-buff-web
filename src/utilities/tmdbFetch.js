@@ -14,6 +14,17 @@ export const tmdbFetch = (endpoint, customConfig) => {
       config
     )
       // once the promise from the initial call resolves, we get the json out of that response object
-      .then((response) => response.json())
+      // Because response.json is an async call, we can mark this success handler function as async so that we can await
+      // on response.json() and pull the data out.
+      .then(async (response) => {
+        const data = await response.json();
+        // fetch actually won't give you a rejection as long as you are able to talk to the server. It will give you a
+        // response object with "ok: false". When we get that, we want to return a rejection. That's what this check is for.
+        if (response.ok) {
+          return data;
+        } else {
+          return Promise.reject(data);
+        }
+      })
   );
 };

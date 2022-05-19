@@ -1,13 +1,14 @@
 import React, { useEffect, useState } from 'react';
-import { Stack, TextField, Typography } from '@mui/material';
+import { Box, Stack, TextField, Typography } from '@mui/material';
 import { MovieInfoCard } from './MovieInfoCard';
-import { tmdbFetch } from '../utlities/tmdbFetch';
+import { tmdbFetch } from '../utilities/tmdbFetch';
 
 export const DiscoverPage = () => {
   const [status, setStatus] = useState('idle');
   const [query, setQuery] = useState('');
   const [queried, setQueried] = useState(false);
   const [data, setData] = useState(null);
+  const [error, setError] = useState(null);
 
   const handleSubmit = (e) => {
     // Note: Preventing default is the first thing you should do whenever handling a submit in Reac. If you don't do
@@ -26,11 +27,17 @@ export const DiscoverPage = () => {
     // pulled the fetch function out into a util to make it a reusable api client
     tmdbFetch(`&language=en-US&query=${encodeURIComponent(query)}&page=1&include_adult=false`)
       // once the response.json promise resolves, we take out out the response data...
-      .then((responseData) => {
-        // and store it in state
-        setData(responseData);
-        setStatus('success');
-      });
+      .then(
+        (responseData) => {
+          // and store it in state
+          setData(responseData);
+          setStatus('success');
+        },
+        (errorData) => {
+          setError(errorData);
+          setStatus('error');
+        }
+      );
     // Only make this call when one of these changes
   }, [queried, query]);
 
@@ -47,6 +54,18 @@ export const DiscoverPage = () => {
           aria-label='search'
         />
       </form>
+
+      {status === 'error' ? (
+        <Box>
+          <Typography variant='subtitle1' color='error'>
+            There was an error.
+          </Typography>
+          <Typography variant='subtitle2' color='error'>
+            {/*This is because sometimes I get back a message and sometimes it's a status_message.*/}
+            {error.message ?? error.status_message ?? 'Please try again.'}
+          </Typography>
+        </Box>
+      ) : null}
 
       {status === 'success' ? (
         data.results.length ? (
