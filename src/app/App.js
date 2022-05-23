@@ -5,6 +5,7 @@ import { MovieBuffLogo } from '../components/MovieBuffLogo';
 import { ThemeProvider, Typography, Button, Stack } from '@mui/material';
 import { useState } from 'react';
 import { LoginFormDialog } from '../components/LoginFormDialog';
+import { CrudApp } from '../firebaseCrudApp/CrudApp';
 
 export const App = () => {
   const [showDialog, setShowDialog] = useState('none');
@@ -30,6 +31,9 @@ export const App = () => {
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline />
+
+      {/*<CrudApp />*/}
+
       <div style={landingPageStyle}>
         <MovieBuffLogo width='250' height='250' />
         <Typography variant='h1'>Movie Buff</Typography>

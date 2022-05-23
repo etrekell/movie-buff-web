@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { collection, getDocs, addDoc, doc, updateDoc, deleteDoc } from 'firebase/firestore';
 import { db } from '../firebaseConfig';
 
-export const FirebaseCrudApp = () => {
+export const AuthenticatedApp = () => {
   const [people, setPeople] = useState([]);
   const peopleCollectionRef = collection(db, 'people');
 
@@ -58,7 +58,7 @@ export const FirebaseCrudApp = () => {
         </div>
       </form>
       <hr />
-      <h1>Users:</h1>
+      <h1>People:</h1>
       <ul>
         {people.map((person) => (
           <li key={person.id}>
