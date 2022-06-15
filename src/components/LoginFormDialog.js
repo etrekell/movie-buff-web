@@ -18,10 +18,8 @@ export const LoginFormDialog = ({ dialogType, showDialog, setOpenDialog, onSubmi
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // This has to be "username" and can’t be "userName" - This is because it has to match what is in the elements object
-    // i.e., whatever you named the id for the input field
-    const { username, password } = e.target.elements;
-    onSubmit({ username: username.value, password: password.value });
+    const { email, password } = e.target.elements;
+    onSubmit({ email: email.value, password: password.value });
     setOpenDialog('none');
   };
 
@@ -33,12 +31,12 @@ export const LoginFormDialog = ({ dialogType, showDialog, setOpenDialog, onSubmi
           <TextField
             fullWidth
             autoFocus
-            id='username'
-            label='Username'
+            id='email'
+            label='Email'
             variant='outlined'
             size='small'
             margin='dense'
-            type='text'
+            type='email'
             required
           />
           <TextField

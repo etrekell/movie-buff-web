@@ -11,14 +11,14 @@ export const App = () => {
   const [user, setUser] = useState(null);
 
   const login = (formData) => {
-    signInWithEmailAndPassword(auth, formData.username, formData.password).then((userCreds) => {
+    signInWithEmailAndPassword(auth, formData.email, formData.password).then((userCreds) => {
       console.log('login', formData);
       setUser(userCreds);
     });
   };
 
   const register = (formData) => {
-    createUserWithEmailAndPassword(auth, formData.username, formData.password).then((userCreds) => {
+    createUserWithEmailAndPassword(auth, formData.email, formData.password).then((userCreds) => {
       console.log('register', formData);
       setUser(userCreds);
     });
