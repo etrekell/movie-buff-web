@@ -18,6 +18,8 @@ export const RegisterFormDialog = ({ showDialog, setOpenDialog, onSubmit }) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    // This has to be "username" and can’t be "userName" - This is because it has to match what is in the elements object
+    // i.e., whatever you named the id for the input field
     const { email, username, password } = e.target.elements;
     onSubmit({ email: email.value, username: username.value, password: password.value });
     setOpenDialog('none');
