@@ -12,14 +12,14 @@ import {
 import Visibility from '@mui/icons-material/Visibility';
 import VisibilityOff from '@mui/icons-material/VisibilityOff';
 
-export const LoginFormDialog = ({ showDialog, setOpenDialog, onSubmit }) => {
+export const RegisterFormDialog = ({ showDialog, setOpenDialog, onSubmit }) => {
+  const dialogTitle = 'Register';
   const [showPassword, setShowPassword] = useState(false);
-  const dialogTitle = 'Login';
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    const { email, password } = e.target.elements;
-    onSubmit({ email: email.value, password: password.value });
+    const { email, username, password } = e.target.elements;
+    onSubmit({ email: email.value, username: username.value, password: password.value });
     setOpenDialog('none');
   };
 
@@ -37,6 +37,16 @@ export const LoginFormDialog = ({ showDialog, setOpenDialog, onSubmit }) => {
             size='small'
             margin='dense'
             type='email'
+            required
+          />
+          <TextField
+            fullWidth
+            id='username'
+            label='Username'
+            variant='outlined'
+            size='small'
+            margin='dense'
+            type='text'
             required
           />
           <TextField

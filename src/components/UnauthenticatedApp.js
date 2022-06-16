@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Button, Stack, Typography } from '@mui/material';
 import { MovieBuffLogo } from './MovieBuffLogo';
 import { LoginFormDialog } from './LoginFormDialog';
+import { RegisterFormDialog } from './RegisterFormDialog';
 
 const landingPageStyle = {
   display: 'flex',
@@ -30,18 +31,8 @@ export const UnauthenticatedApp = ({ login, register }) => {
           </Button>
         </Stack>
       </div>
-      <LoginFormDialog
-        dialogType='login'
-        showDialog={showDialog === 'login'}
-        setOpenDialog={setShowDialog}
-        onSubmit={login}
-      />
-      <LoginFormDialog
-        dialogType='register'
-        showDialog={showDialog === 'register'}
-        setOpenDialog={setShowDialog}
-        onSubmit={register}
-      />
+      <LoginFormDialog showDialog={showDialog === 'login'} setOpenDialog={setShowDialog} onSubmit={login} />
+      <RegisterFormDialog showDialog={showDialog === 'register'} setOpenDialog={setShowDialog} onSubmit={register} />
     </>
   );
 };
