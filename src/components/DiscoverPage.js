@@ -11,7 +11,7 @@ export const DiscoverPage = () => {
   const [error, setError] = useState(null);
 
   const handleSubmit = (e) => {
-    // Note: Preventing default is the first thing you should do whenever handling a submit in Reac. If you don't do
+    // Note: Preventing default is the first thing you should do whenever handling a submit in React. If you don't do
     // this, every submission will do a full page refresh and make a POST request to the current URL with the data from the form.
     e.preventDefault();
     setQueried(true);
