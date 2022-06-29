@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Box, Stack, TextField, Typography } from '@mui/material';
 import { MovieInfoCard } from './MovieInfoCard';
-import { tmdbFetch } from '../utilities/tmdbFetch';
+import { customFetch } from '../utilities/customFetch';
 
 export const DiscoverPage = () => {
   const [status, setStatus] = useState('idle');
@@ -9,6 +9,10 @@ export const DiscoverPage = () => {
   const [queried, setQueried] = useState(false);
   const [data, setData] = useState(null);
   const [error, setError] = useState(null);
+  // encodeURIComponent properly serializes strings to be used in a URL, For example, it replaces strings with "%20"
+  const tmdbSearchPath = `${process.env.REACT_APP_TMDB_API_BASE_URL}/search/movie?api_key=${
+    process.env.REACT_APP_TMDB_API_KEY
+  }&language=en-US&query=${encodeURIComponent(query)}&page=1&include_adult=false`;
 
   const handleSubmit = (e) => {
     // Note: Preventing default is the first thing you should do whenever handling a submit in React. If you don't do
@@ -25,9 +29,8 @@ export const DiscoverPage = () => {
     }
     setStatus('loading');
     // pulled the fetch function out into a util to make it a reusable api client
-    // encodeURIComponent properly serializes strings to be used in a URL, For example, it replaces strings with "%20"
-    tmdbFetch(`&language=en-US&query=${encodeURIComponent(query)}&page=1&include_adult=false`)
-      // once the response.json promise resolves, we take out out the response data...
+    customFetch(tmdbSearchPath)
+      // once the response.json promise resolves, we take out the response data...
       .then(
         (responseData) => {
           // and store it in state
