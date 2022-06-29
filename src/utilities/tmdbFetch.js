@@ -9,7 +9,6 @@ export const tmdbFetch = (endpoint, customConfig) => {
     fetch(
       // This is the proper way to store api keys, they are in the .env file which is listed in the gitignore so
       // that it is not tracked.
-      // encodeURIComponent properly serializes strings to be used in a URL, For example, it replaces strings with "%20"
       `${process.env.REACT_APP_TMDB_API_BASE_URL}/search/movie?api_key=${process.env.REACT_APP_TMDB_API_KEY}${endpoint}`,
       config
     )

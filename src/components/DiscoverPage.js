@@ -25,6 +25,7 @@ export const DiscoverPage = () => {
     }
     setStatus('loading');
     // pulled the fetch function out into a util to make it a reusable api client
+    // encodeURIComponent properly serializes strings to be used in a URL, For example, it replaces strings with "%20"
     tmdbFetch(`&language=en-US&query=${encodeURIComponent(query)}&page=1&include_adult=false`)
       // once the response.json promise resolves, we take out out the response data...
       .then(
