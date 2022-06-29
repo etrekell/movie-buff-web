@@ -2,13 +2,12 @@ import React, { useEffect, useState } from 'react';
 import { Box, Stack, TextField, Typography } from '@mui/material';
 import { MovieInfoCard } from './MovieInfoCard';
 import { customFetch } from '../utilities/customFetch';
+import { useAsync } from '../utilities/hooks/useAsync';
 
 export const DiscoverPage = () => {
-  const [status, setStatus] = useState('idle');
+  const { data, error, run, isLoading, isError, isSuccess } = useAsync();
   const [query, setQuery] = useState('');
   const [queried, setQueried] = useState(false);
-  const [data, setData] = useState(null);
-  const [error, setError] = useState(null);
   // encodeURIComponent properly serializes strings to be used in a URL, For example, it replaces strings with "%20"
   const tmdbSearchPath = `${process.env.REACT_APP_TMDB_API_BASE_URL}/search/movie?api_key=${
     process.env.REACT_APP_TMDB_API_KEY
@@ -27,23 +26,9 @@ export const DiscoverPage = () => {
     if (!queried) {
       return;
     }
-    setStatus('loading');
-    // pulled the fetch function out into a util to make it a reusable api client
-    customFetch(tmdbSearchPath)
-      // once the response.json promise resolves, we take out the response data...
-      .then(
-        (responseData) => {
-          // and store it in state
-          setData(responseData);
-          setStatus('success');
-        },
-        (errorData) => {
-          setError(errorData);
-          setStatus('error');
-        }
-      );
+    run(customFetch(tmdbSearchPath));
     // Only make this call when one of these changes
-  }, [queried, query]);
+  }, [queried, query, run, tmdbSearchPath]);
 
   return (
     <Stack spacing={2} alignItems='center'>
@@ -59,7 +44,10 @@ export const DiscoverPage = () => {
         />
       </form>
 
-      {status === 'error' ? (
+      {/* TODO: Replace this with a fancy spinner */}
+      {isLoading ? <h1>LOADING...</h1> : null}
+
+      {isError ? (
         <Box>
           <Typography variant='subtitle1' color='error'>
             There was an error.
@@ -71,7 +59,7 @@ export const DiscoverPage = () => {
         </Box>
       ) : null}
 
-      {status === 'success' ? (
+      {isSuccess ? (
         data.results.length ? (
           <Stack spacing={4}>
             {data.results.map((movie) => (
