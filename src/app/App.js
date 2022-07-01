@@ -13,6 +13,7 @@ import {
 } from 'firebase/auth';
 import { AuthenticatedApp } from '../components/AuthenticatedApp';
 import { useAsync } from '../utilities/hooks/useAsync';
+import { FullPageLoadingSpinner } from '../components/lib';
 
 const getAuthStateChangedPromise = async () => {
   return new Promise((resolve, reject) => {
@@ -33,6 +34,7 @@ export const App = () => {
 
   // Without this, the user is logged out on every refresh
   useEffect(() => {
+    // By using the run function, all the state setting is happening with the useAsync hook
     run(getAuthStateChangedPromise());
   }, [run]);
 
@@ -57,8 +59,7 @@ export const App = () => {
   };
 
   if (isLoading || isIdle) {
-    // TODO: replace with a fancy spinner
-    return <h1>LOADING...</h1>;
+    return <FullPageLoadingSpinner />;
   }
 
   if (isError) {
