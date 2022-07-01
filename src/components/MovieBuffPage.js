@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { auth } from '../firebaseConfig';
 import { useEffect } from 'react';
-import { UnauthenticatedApp } from '../components/UnauthenticatedApp';
+import { UnauthenticatedApp } from './UnauthenticatedApp';
 import {
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
@@ -9,10 +9,9 @@ import {
   updateProfile,
   onAuthStateChanged,
 } from 'firebase/auth';
-import { AuthenticatedApp } from '../components/AuthenticatedApp';
+import { AuthenticatedApp } from './AuthenticatedApp';
 import { useAsync } from '../utilities/hooks/useAsync';
-import { FullPageLoadingSpinner, SomethingsWrongError } from '../components/lib';
-import { Typography } from '@mui/material';
+import { FullPageLoadingSpinner, SomethingsWrongError } from './lib';
 
 const getAuthStateChangedPromise = async () => {
   return new Promise((resolve, reject) => {
