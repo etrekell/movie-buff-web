@@ -18,6 +18,12 @@ export const DiscoverPage = () => {
     // Note: Preventing default is the first thing you should do whenever handling a submit in React. If you don't do
     // this, every submission will do a full page refresh and make a POST request to the current URL with the data from the form.
     e.preventDefault();
+
+    // exit early if there is no input
+    if (!e.target.elements.search.value) {
+      return;
+    }
+
     setQueried(true);
     setQuery(e.target.elements.search.value);
   };
