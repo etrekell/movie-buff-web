@@ -11,7 +11,8 @@ import {
 } from 'firebase/auth';
 import { AuthenticatedApp } from '../components/AuthenticatedApp';
 import { useAsync } from '../utilities/hooks/useAsync';
-import { FullPageLoadingSpinner } from '../components/lib';
+import { FullPageLoadingSpinner, SomethingsWrongError } from '../components/lib';
+import { Typography } from '@mui/material';
 
 const getAuthStateChangedPromise = async () => {
   return new Promise((resolve, reject) => {
@@ -28,7 +29,7 @@ const getAuthStateChangedPromise = async () => {
 };
 
 export const MovieBuffPage = () => {
-  const { data: user, setData: setUser, run, isLoading, isIdle, isError, isSuccess } = useAsync();
+  const { data: user, setData: setUser, run, isLoading, isIdle, isError, isSuccess, error } = useAsync();
 
   // Without this, the user is logged out on every refresh
   useEffect(() => {
@@ -61,8 +62,7 @@ export const MovieBuffPage = () => {
   }
 
   if (isError) {
-    // TODO: replace with something better
-    return <h1>ERROR</h1>;
+    return <SomethingsWrongError errorMessage={error ? error.message : null} />;
   }
 
   if (isSuccess) {
