@@ -3,6 +3,7 @@ import { Box, Stack, TextField, Typography } from '@mui/material';
 import { MovieInfoCard } from './MovieInfoCard';
 import { customFetch } from '../utilities/customFetch';
 import { useAsync } from '../utilities/hooks/useAsync';
+import { FullPageLoadingSpinner } from './lib';
 
 export const DiscoverPage = () => {
   const { data, error, run, isLoading, isError, isSuccess } = useAsync();
@@ -45,7 +46,7 @@ export const DiscoverPage = () => {
       </form>
 
       {/* TODO: Replace this with a fancy spinner */}
-      {isLoading ? <h1>LOADING...</h1> : null}
+      {isLoading ? <FullPageLoadingSpinner /> : null}
 
       {isError ? (
         <Box>
