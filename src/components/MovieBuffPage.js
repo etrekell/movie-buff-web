@@ -12,6 +12,7 @@ import {
 import { AuthenticatedApp } from './AuthenticatedApp';
 import { useAsync } from '../utilities/hooks/useAsync';
 import { FullPageLoadingSpinner, SomethingsWrongError } from './lib';
+import { DiscoverPage } from './DiscoverPage';
 
 const getAuthStateChangedPromise = async () => {
   return new Promise((resolve, reject) => {
@@ -67,11 +68,12 @@ export const MovieBuffPage = () => {
   if (isSuccess) {
     return (
       <>
-        {user ? (
-          <AuthenticatedApp user={user} logout={logout} />
-        ) : (
-          <UnauthenticatedApp login={login} register={register} />
-        )}
+        {/*{user ? (*/}
+        {/*  <AuthenticatedApp user={user} logout={logout} />*/}
+        {/*) : (*/}
+        {/*  <UnauthenticatedApp login={login} register={register} />*/}
+        {/*)}*/}
+        <DiscoverPage />
       </>
     );
   }

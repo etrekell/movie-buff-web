@@ -1,11 +1,18 @@
 import { signOut } from 'firebase/auth';
 import { auth } from '../firebaseConfig';
 
-export const customFetch = (path, customConfig) => {
+export const customFetch = (path, { data, headers: customHeaders, ...customConfig } = {}) => {
   const config = {
-    // This allows the user of this function to pass in a customConfig and defaults to a GET call if they don't specify
-    // otherwise. The order here matters because what ever is passed in last "wins" in a conflict.
-    method: 'GET',
+    // This allows the user of this function to pass in a customConfig or headers. It defaults to a GET call if they don't specify.
+    // The order here matters because what ever is passed in last "wins" in a conflict.
+
+    // If data is passed in, we are going to make a POST request, otherwise a GET
+    method: data ? 'POST' : 'GET',
+    body: data ? JSON.stringify(data) : undefined,
+    headers: {
+      'Content-Type': data ? 'application/json' : undefined,
+      ...customHeaders,
+    },
     ...customConfig,
   };
   return (
