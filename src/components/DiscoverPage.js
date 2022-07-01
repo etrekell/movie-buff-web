@@ -51,7 +51,6 @@ export const DiscoverPage = () => {
         />
       </form>
 
-      {/* TODO: Replace this with a fancy spinner */}
       {isLoading ? <FullPageLoadingSpinner /> : null}
 
       {isError ? (
