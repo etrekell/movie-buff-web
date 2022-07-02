@@ -12,9 +12,8 @@ import {
 import { AuthenticatedApp } from './AuthenticatedApp';
 import { useAsync } from '../utilities/hooks/useAsync';
 import { FullPageLoadingSpinner, SomethingsWrongError } from './lib';
-import { DiscoverPage } from './DiscoverPage';
 
-const getAuthStateChangedPromise = async () => {
+const getUserFromAuth = async () => {
   return new Promise((resolve, reject) => {
     onAuthStateChanged(
       auth,
@@ -34,7 +33,7 @@ export const MovieBuffPage = () => {
   // Without this, the user is logged out on every refresh
   useEffect(() => {
     // By using the run function, all the state setting is happening with the useAsync hook
-    run(getAuthStateChangedPromise());
+    run(getUserFromAuth());
   }, [run]);
 
   const login = (formData) => {
@@ -45,12 +44,18 @@ export const MovieBuffPage = () => {
   };
 
   const register = (formData) => {
-    createUserWithEmailAndPassword(auth, formData.email, formData.password).then(({ user }) => {
-      console.log('register', formData);
-      updateProfile(auth.currentUser, {
-        displayName: formData.username,
-      }).then(() => setUser(user));
-    });
+    run(
+      new Promise((resolve, reject) => {
+        createUserWithEmailAndPassword(auth, formData.email, formData.password)
+          .then(({ user }) => {
+            console.log('register', formData);
+            updateProfile(auth.currentUser, {
+              displayName: formData.username,
+            }).then(() => resolve(user));
+          })
+          .catch((reason) => reject(reason));
+      })
+    );
   };
 
   const logout = () => {
@@ -68,12 +73,11 @@ export const MovieBuffPage = () => {
   if (isSuccess) {
     return (
       <>
-        {/*{user ? (*/}
-        {/*  <AuthenticatedApp user={user} logout={logout} />*/}
-        {/*) : (*/}
-        {/*  <UnauthenticatedApp login={login} register={register} />*/}
-        {/*)}*/}
-        <DiscoverPage />
+        {user ? (
+          <AuthenticatedApp user={user} logout={logout} />
+        ) : (
+          <UnauthenticatedApp login={login} register={register} />
+        )}
       </>
     );
   }

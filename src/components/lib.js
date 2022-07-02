@@ -20,10 +20,14 @@ const FullPageLoadingSpinner = () => {
 };
 
 const SomethingsWrongError = ({ errorMessage }) => {
+  const message = errorMessage ? errorMessage : 'Hmm... Something is wrong.';
   return (
     <div style={centeredStyle}>
-      <Typography color='error'>Hmmm.. Something is wrong, try refreshing!</Typography>
-      <Typography color='error'>{errorMessage ? errorMessage : null}</Typography>
+      <Typography color='error' sx={{ fontWeight: 'bold', fontSize: 32 }}>
+        Error:
+      </Typography>
+      <Typography color='error'>{message}</Typography>
+      <Typography color='error'>Please try again.</Typography>
     </div>
   );
 };
