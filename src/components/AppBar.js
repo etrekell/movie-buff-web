@@ -5,7 +5,7 @@ import { MovieBuffLogo } from './MovieBuffLogo';
 export const AppBar = () => {
   return (
     <MuiAppBar position='static'>
-      <Toolbar>
+      <Toolbar variant='dense'>
         <IconButton size='small' edge='start' aria-label='logo'>
           <MovieBuffLogo width='25' height='25' />
         </IconButton>
