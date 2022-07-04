@@ -29,7 +29,7 @@ const getUserFromAuth = async () => {
 };
 
 export const MovieBuffPage = () => {
-  const { data: user, setData: setUser, run, isLoading, isIdle, isError, isSuccess, error } = useAsync();
+  const { data: user, setData: setUser, run, isLoading, isIdle, isSuccess, error } = useAsync();
 
   // Without this, the user is logged out on every refresh
   useEffect(() => {
@@ -63,34 +63,38 @@ export const MovieBuffPage = () => {
     signOut(auth).then(() => setUser(null));
   };
 
-  if (isLoading || isIdle) {
-    return (
-      <>
-        <AppBar />
-        <FullPageLoadingSpinner />
-      </>
-    );
-  }
+  const getStatusBasedComponent = () => {
+    if (isLoading || isIdle) {
+      return (
+        <>
+          <FullPageLoadingSpinner />
+        </>
+      );
+    }
 
-  if (isError) {
+    if (isSuccess) {
+      return (
+        <>
+          {user ? (
+            <AuthenticatedApp user={user} logout={logout} />
+          ) : (
+            <UnauthenticatedApp login={login} register={register} />
+          )}
+        </>
+      );
+    }
+    // if isError or anything else (Should never be anything else at this point but adding as a fallback)
     return (
       <>
-        <AppBar />
         <SomethingsWrongError errorMessage={error ? error.message : null} />
       </>
     );
-  }
+  };
 
-  if (isSuccess) {
-    return (
-      <>
-        <AppBar />
-        {user ? (
-          <AuthenticatedApp user={user} logout={logout} />
-        ) : (
-          <UnauthenticatedApp login={login} register={register} />
-        )}
-      </>
-    );
-  }
+  return (
+    <>
+      <AppBar user={user} logout={logout} />
+      {getStatusBasedComponent()}
+    </>
+  );
 };
