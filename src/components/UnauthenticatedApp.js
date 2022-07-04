@@ -11,7 +11,7 @@ const landingPageStyle = {
   justifyContent: 'center',
   width: '100%',
   // 'vh' is Viewport Height - The unis is based on the height of the viewport.
-  height: '100vh',
+  height: '85vh',
 };
 
 export const UnauthenticatedApp = ({ login, register }) => {

@@ -12,6 +12,7 @@ import {
 import { AuthenticatedApp } from './AuthenticatedApp';
 import { useAsync } from '../utilities/hooks/useAsync';
 import { FullPageLoadingSpinner, SomethingsWrongError } from './lib';
+import { AppBar } from './AppBar';
 
 const getUserFromAuth = async () => {
   return new Promise((resolve, reject) => {
@@ -63,16 +64,27 @@ export const MovieBuffPage = () => {
   };
 
   if (isLoading || isIdle) {
-    return <FullPageLoadingSpinner />;
+    return (
+      <>
+        <AppBar />
+        <FullPageLoadingSpinner />
+      </>
+    );
   }
 
   if (isError) {
-    return <SomethingsWrongError errorMessage={error ? error.message : null} />;
+    return (
+      <>
+        <AppBar />
+        <SomethingsWrongError errorMessage={error ? error.message : null} />
+      </>
+    );
   }
 
   if (isSuccess) {
     return (
       <>
+        <AppBar />
         {user ? (
           <AuthenticatedApp user={user} logout={logout} />
         ) : (
