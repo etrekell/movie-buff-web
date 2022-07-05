@@ -1,11 +1,9 @@
 import React from 'react';
-import { useNavigate } from 'react-router-dom';
 import { AppBar as MuiAppBar, Button, IconButton, Stack, Toolbar, Typography } from '@mui/material';
 import { MovieBuffLogo } from './MovieBuffLogo';
+import { NavButton } from './lib';
 
 export const AppBar = ({ user, logout }) => {
-  const navigate = useNavigate();
-
   // TODO: Do something better here (Like the dropdown to either login or logout)
   const displayName = user ? user.displayName : '????';
 
@@ -19,10 +17,10 @@ export const AppBar = ({ user, logout }) => {
           Movie Buff
         </Typography>
         <Stack direction='row' spacing={2}>
-          <Button color='inherit' onClick={() => navigate('/discover')}>
-            Discover
-          </Button>
+          <NavButton path='/discover'>discover</NavButton>
+          <NavButton path='/fake'>Fake</NavButton>
           <Button color='inherit'>User: {displayName}</Button>
+          {/* TODO: Do something better here (Like the dropdown to either login or logout)*/}
           <Button onClick={logout} color='inherit'>
             Logout
           </Button>

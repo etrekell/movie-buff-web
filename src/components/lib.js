@@ -1,5 +1,5 @@
 import { Button, CircularProgress, Typography } from '@mui/material';
-import { useNavigate } from 'react-router-dom';
+import { useMatch, useNavigate } from 'react-router-dom';
 
 const centeredStyle = {
   display: 'flex',
@@ -47,4 +47,16 @@ const NotFoundPage = () => {
   );
 };
 
-export { FullPageLoadingSpinner, SomethingsWrongError, NotFoundPage, centeredStyle };
+const NavButton = ({ path, children }) => {
+  const match = useMatch(path);
+  const navigate = useNavigate();
+  const underlineStyle = match ? { textDecoration: 'underline' } : null;
+
+  return (
+    <Button color='inherit' sx={underlineStyle} onClick={() => navigate(path)}>
+      {children}
+    </Button>
+  );
+};
+
+export { FullPageLoadingSpinner, SomethingsWrongError, NotFoundPage, NavButton, centeredStyle };
