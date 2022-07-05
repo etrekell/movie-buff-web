@@ -1,5 +1,5 @@
 import React from 'react';
-import { AppBar as MuiAppBar, Button, IconButton, Stack, Toolbar, Typography } from '@mui/material';
+import { AppBar as MuiAppBar, Box, Button, IconButton, Stack, Toolbar, Typography } from '@mui/material';
 import { MovieBuffLogo } from './MovieBuffLogo';
 import { NavButton } from './lib';
 import { theme } from '../app/MuiAppTheme';
@@ -16,14 +16,18 @@ export const AppBar = ({ user, logout }) => {
         <IconButton size='small' edge='start' aria-label='logo' onClick={() => navigate('/discover')}>
           <MovieBuffLogo width='25' height='25' />
         </IconButton>
-        <Typography color='inherit' variant='h6' component='div' sx={{ flexGrow: 1, paddingLeft: '10px' }}>
+        <Typography sx={{ paddingLeft: '10px' }} color='inherit' variant='h6' component='span'>
           Movie Buff
         </Typography>
+        <Box sx={{ flexGrow: 1, paddingLeft: '50px' }}>
+          <Stack direction='row' spacing={2}>
+            <NavButton path='/discover'>discover</NavButton>
+            <NavButton path='/fake'>Fake</NavButton>
+          </Stack>
+        </Box>
         <Stack direction='row' spacing={2}>
-          <NavButton path='/discover'>discover</NavButton>
-          <NavButton path='/fake'>Fake</NavButton>
-          <Button color='inherit'>User: {displayName}</Button>
           {/* TODO: Do something better here (Like the dropdown to either login or logout)*/}
+          <Button color='inherit'>User: {displayName}</Button>
           <Button onClick={logout} color='inherit'>
             Logout
           </Button>
