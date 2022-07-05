@@ -9,6 +9,7 @@ import {
   updateProfile,
   onAuthStateChanged,
 } from 'firebase/auth';
+import { useNavigate } from 'react-router-dom';
 import { AuthenticatedApp } from './AuthenticatedApp';
 import { useAsync } from '../utilities/hooks/useAsync';
 import { FullPageLoadingSpinner, SomethingsWrongError } from './lib';
@@ -30,6 +31,7 @@ const getUserFromAuth = async () => {
 
 export const MovieBuffPage = () => {
   const { data: user, setData: setUser, run, isLoading, isIdle, isSuccess, error } = useAsync();
+  const navigate = useNavigate();
 
   // Without this, the user is logged out on every refresh
   useEffect(() => {
@@ -60,7 +62,11 @@ export const MovieBuffPage = () => {
   };
 
   const logout = () => {
-    signOut(auth).then(() => setUser(null));
+    signOut(auth).then(() => {
+      setUser(null);
+      // Fixes bug where users would be directed to the path to where the last authenticated user was at
+      navigate('/discover');
+    });
   };
 
   const getStatusBasedComponent = () => {
