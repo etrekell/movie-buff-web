@@ -1,15 +1,28 @@
 import React from 'react';
-import { Button } from '@mui/material';
+import { Route, Routes } from 'react-router-dom';
+import { DiscoverPage } from './DiscoverPage';
+import { NotFoundPage } from './lib';
+import { MoviePage } from './MoviePage';
 
-export const AuthenticatedApp = ({ user, logout }) => {
-  const displayName = user ? user.displayName : '';
+export const AuthenticatedApp = () => {
+  const AppRoutes = () => {
+    return (
+      <Routes>
+        {/*'/discover' and '/' will both do to the DiscoverPage*/}
+        <Route path='/discover' element={<DiscoverPage />} />
+        <Route path='/' element={<DiscoverPage />} />
+
+        <Route path='/movie/:movieId' element={<MoviePage />} />
+
+        {/*This is a catch all*/}
+        <Route path='*' element={<NotFoundPage />} />
+      </Routes>
+    );
+  };
+
   return (
     <div>
-      <h1>Authenticated</h1>
-      <p>Logged in as: {displayName}</p>
-      <Button variant='contained' onClick={() => logout('none')}>
-        Logout
-      </Button>
+      <AppRoutes />
     </div>
   );
 };

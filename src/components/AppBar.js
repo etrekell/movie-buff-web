@@ -1,8 +1,14 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 import { AppBar as MuiAppBar, Button, IconButton, Stack, Toolbar, Typography } from '@mui/material';
 import { MovieBuffLogo } from './MovieBuffLogo';
 
-export const AppBar = () => {
+export const AppBar = ({ user, logout }) => {
+  const navigate = useNavigate();
+
+  // TODO: Do something better here (Like the dropdown to either login or logout)
+  const displayName = user ? user.displayName : '????';
+
   return (
     <MuiAppBar position='static'>
       <Toolbar variant='dense'>
@@ -13,11 +19,13 @@ export const AppBar = () => {
           Movie Buff
         </Typography>
         <Stack direction='row' spacing={2}>
-          {/*TODO: Replace these with real links*/}
-          <Button color='inherit'>ONE</Button>
-          <Button color='inherit'>TWO</Button>
-          <Button color='inherit'>THREE</Button>
-          <Button color='inherit'>LOGIN</Button>
+          <Button color='inherit' onClick={() => navigate('/discover')}>
+            Discover
+          </Button>
+          <Button color='inherit'>User: {displayName}</Button>
+          <Button onClick={logout} color='inherit'>
+            Logout
+          </Button>
         </Stack>
       </Toolbar>
     </MuiAppBar>
