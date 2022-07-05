@@ -71,11 +71,7 @@ export const MovieBuffPage = () => {
 
   const getStatusBasedComponent = () => {
     if (isLoading || isIdle) {
-      return (
-        <>
-          <FullPageLoadingSpinner />
-        </>
-      );
+      return <FullPageLoadingSpinner />;
     }
 
     if (isSuccess) {
@@ -90,11 +86,7 @@ export const MovieBuffPage = () => {
       );
     }
     // if isError or anything else (Should never be anything else at this point but adding as a fallback)
-    return (
-      <>
-        <SomethingsWrongError errorMessage={error ? error.message : null} />
-      </>
-    );
+    return <SomethingsWrongError errorMessage={error ? error.message : null} />;
   };
 
   return (
