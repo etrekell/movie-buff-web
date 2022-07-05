@@ -1,4 +1,5 @@
 import { Button, CircularProgress, Typography } from '@mui/material';
+import { useNavigate } from 'react-router-dom';
 
 const centeredStyle = {
   display: 'flex',
@@ -34,11 +35,14 @@ const SomethingsWrongError = ({ errorMessage }) => {
 };
 
 const NotFoundPage = () => {
+  const navigate = useNavigate();
+
   return (
     <div style={centeredStyle}>
       <Typography sx={{ fontWeight: 'bold', fontSize: 32, paddingBottom: '10px' }}>Page Not Found</Typography>
-      {/*TODO: Get this button to actually go back*/}
-      <Button variant='contained'>Go Back</Button>
+      <Button variant='contained' color='inherit' onClick={() => navigate('/discover')}>
+        Go Home
+      </Button>
     </div>
   );
 };
