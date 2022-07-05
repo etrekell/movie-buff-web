@@ -1,11 +1,12 @@
-import { CircularProgress, Typography } from '@mui/material';
+import { Button, CircularProgress, Typography } from '@mui/material';
 
 const centeredStyle = {
   display: 'flex',
   flexDirection: 'column',
   alignItems: 'center',
   justifyContent: 'center',
-  height: '100vh',
+  width: '100%',
+  height: '85vh',
 };
 
 const FullPageLoadingSpinner = () => {
@@ -32,4 +33,14 @@ const SomethingsWrongError = ({ errorMessage }) => {
   );
 };
 
-export { FullPageLoadingSpinner, SomethingsWrongError };
+const NotFoundPage = () => {
+  return (
+    <div style={centeredStyle}>
+      <Typography sx={{ fontWeight: 'bold', fontSize: 32, paddingBottom: '10px' }}>Page Not Found</Typography>
+      {/*TODO: Get this button to actually go back*/}
+      <Button variant='contained'>Go Back</Button>
+    </div>
+  );
+};
+
+export { FullPageLoadingSpinner, SomethingsWrongError, NotFoundPage, centeredStyle };

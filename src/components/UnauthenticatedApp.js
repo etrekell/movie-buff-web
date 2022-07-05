@@ -3,23 +3,14 @@ import { Button, Stack, Typography } from '@mui/material';
 import { MovieBuffLogo } from './MovieBuffLogo';
 import { LoginFormDialog } from './LoginFormDialog';
 import { RegisterFormDialog } from './RegisterFormDialog';
-
-const landingPageStyle = {
-  display: 'flex',
-  flexDirection: 'column',
-  alignItems: 'center',
-  justifyContent: 'center',
-  width: '100%',
-  // 'vh' is Viewport Height - The unis is based on the height of the viewport.
-  height: '85vh',
-};
+import { centeredStyle } from './lib';
 
 export const UnauthenticatedApp = ({ login, register }) => {
   const [showDialog, setShowDialog] = useState('none');
 
   return (
     <>
-      <div style={landingPageStyle}>
+      <div style={centeredStyle}>
         <MovieBuffLogo width='250' height='250' />
         <Typography variant='h1'>Movie Buff</Typography>
         <Stack spacing={2} direction='row' style={{ padding: '20px' }}>
