@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { Box, Grid, IconButton, Typography } from '@mui/material';
+import { Box, Grid, IconButton, Typography, Paper } from '@mui/material';
 import { FullPageLoadingSpinner, SomethingsWrongError } from './lib';
 import { useParams } from 'react-router-dom';
 import { useAsync } from '../utilities/hooks/useAsync';
@@ -42,8 +42,8 @@ export const MoviePage = () => {
 
     if (isSuccess) {
       return (
-        <>
-          <Box sx={moviePageStyle}>
+        <Box sx={moviePageStyle} paddingTop={6}>
+          <Paper elevation={2}>
             <Grid container p={2} spacing={2}>
               <Grid item xs={12}>
                 <Grid container>
@@ -85,8 +85,8 @@ export const MoviePage = () => {
                 </Box>
               </Grid>
             </Grid>
-          </Box>
-        </>
+          </Paper>
+        </Box>
       );
     }
     // if isError or anything else (Should never be anything else at this point but adding as a fallback)
