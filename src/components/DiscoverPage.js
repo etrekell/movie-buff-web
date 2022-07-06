@@ -41,7 +41,7 @@ export const DiscoverPage = () => {
     <Stack spacing={2} alignItems='center'>
       <form onSubmit={handleSubmit}>
         <TextField
-          sx={{ width: '500px', margin: '25px' }}
+          sx={{ width: '600px', margin: '25px' }}
           label='Search for a movie'
           id='search'
           variant='outlined'
@@ -68,8 +68,15 @@ export const DiscoverPage = () => {
       {isSuccess ? (
         data.results.length ? (
           <Stack spacing={4}>
-            {data.results.map(({ title, overview, poster_path, id }) => (
-              <MovieInfoCard title={title} overview={overview} poster_path={poster_path} id={id} key={id} />
+            {data.results.map(({ title, overview, poster_path, id, release_date }) => (
+              <MovieInfoCard
+                title={title}
+                overview={overview}
+                posterPath={poster_path}
+                releaseDate={release_date}
+                id={id}
+                key={id}
+              />
             ))}
           </Stack>
         ) : (
