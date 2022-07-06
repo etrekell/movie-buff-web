@@ -8,10 +8,9 @@ import noPosterAvail from '../images/no-poster-avail.png';
 import ThumbUpOffAltOutlinedIcon from '@mui/icons-material/ThumbUpOffAltOutlined';
 
 const movieInfoPlaceHolder = {
-  title: 'Loading...',
-  releaseDateString: 'Loading...',
-  tagLine: 'Loading...',
-  overview: 'Loading...',
+  title: '',
+  tagLine: '',
+  overview: '',
 };
 
 export const MoviePage = () => {
@@ -51,7 +50,7 @@ export const MoviePage = () => {
                   <Grid item sm={4} xs={12}>
                     <Box component='img' alt={`${title} poster`} src={poster} width='100%' />
                     <Typography variant='subtitle1' sx={{ textAlign: 'center', fontSize: '1em', fontStyle: 'italic' }}>
-                      {`"${tagLine}"`}
+                      {tagLine ? `"${tagLine}"` : ''}
                     </Typography>
                   </Grid>
                   <Grid item sm={8} xs={12}>
