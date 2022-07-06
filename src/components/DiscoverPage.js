@@ -4,7 +4,6 @@ import { MovieInfoCard } from './MovieInfoCard';
 import { customFetch } from '../utilities/customFetch';
 import { useAsync } from '../utilities/hooks/useAsync';
 import { FullPageLoadingSpinner } from './lib';
-import { Link } from 'react-router-dom';
 
 export const DiscoverPage = () => {
   const { data, error, run, isLoading, isError, isSuccess } = useAsync();
@@ -69,10 +68,8 @@ export const DiscoverPage = () => {
       {isSuccess ? (
         data.results.length ? (
           <Stack spacing={4}>
-            {data.results.map((movie) => (
-              <Link to={`/movie/${movie.id}`} key={movie.id}>
-                <MovieInfoCard title={movie.title} overview={movie.overview} poster_path={movie.poster_path} />
-              </Link>
+            {data.results.map(({ title, overview, poster_path, id }) => (
+              <MovieInfoCard title={title} overview={overview} poster_path={poster_path} id={id} key={id} />
             ))}
           </Stack>
         ) : (
