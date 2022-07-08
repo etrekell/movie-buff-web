@@ -7,6 +7,7 @@ import { customFetch } from '../utilities/customFetch';
 import noPosterAvail from '../images/no-poster-avail.png';
 import ThumbUpOffAltOutlinedIcon from '@mui/icons-material/ThumbUpOffAltOutlined';
 import { getMovieStatusVerbiage } from '../utilities/movieStatusUtil';
+import { MovieCast } from './MovieCast';
 
 const movieInfoPlaceHolder = {
   title: '',
@@ -77,9 +78,7 @@ export const MoviePage = () => {
                 </Grid>
               </Grid>
               <Grid item xs={12}>
-                <Box bgcolor='forestgreen' p={2}>
-                  CAST COMPONENT HERE
-                </Box>
+                <MovieCast movieId={movieId} />
               </Grid>
             </Grid>
           </Paper>
