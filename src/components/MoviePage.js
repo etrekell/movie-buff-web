@@ -70,9 +70,6 @@ export const MoviePage = () => {
                     <Typography variant='h6' pl={2}>
                       {movieStatusVerbiage ?? ''}
                     </Typography>
-                    <Typography variant='h6' pl={2}>
-                      DIRECTOR HERE
-                    </Typography>
                     <Typography variant='subtitle2' p={2} fontSize='1em'>
                       {overview}
                     </Typography>
