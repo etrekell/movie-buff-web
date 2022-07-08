@@ -57,22 +57,22 @@ const getMovieStatusVerbiage = ({ status, release_date: releaseDate }) => {
 
   switch (status) {
     case 'Released':
-      return releaseDate ? `Released on ${releaseDateVerbiage}.` : '';
+      return releaseDate ? `Released on ${releaseDateVerbiage}` : '';
     case 'Rumored':
       return releaseDate
-        ? `Rumored to be released on ${releaseDateVerbiage}.`
+        ? `Rumored to be released on ${releaseDateVerbiage}`
         : 'Rumored to be released on a future date.';
     case 'Planned':
       return releaseDate
-        ? `Planned to be released on ${releaseDateVerbiage}.`
+        ? `Planned to be released on ${releaseDateVerbiage}`
         : 'Planned to be released on a future date.';
     case 'In Production':
       return releaseDate
-        ? `In production, planned to be released on ${releaseDateVerbiage}.`
+        ? `In production, planned to be released on ${releaseDateVerbiage}`
         : 'In production, planned to be released on a future date.';
     case 'Post Production':
       return releaseDate
-        ? `In post-production, planned to be released on ${releaseDateVerbiage}.`
+        ? `In post-production, planned to be released on ${releaseDateVerbiage}`
         : 'In post-production, planned to be released on a future date.';
     case 'Canceled':
       return 'Production and/or production for this film has been cancelled.';
