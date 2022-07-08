@@ -6,6 +6,7 @@ import { useAsync } from '../utilities/hooks/useAsync';
 import { customFetch } from '../utilities/customFetch';
 import noPosterAvail from '../images/no-poster-avail.png';
 import ThumbUpOffAltOutlinedIcon from '@mui/icons-material/ThumbUpOffAltOutlined';
+import { getMovieStatusVerbiage } from '../utilities/movieStatusUtil';
 
 const movieInfoPlaceHolder = {
   title: '',
@@ -23,15 +24,14 @@ export const MoviePage = () => {
     run(customFetch(tmdbMoviePath));
   }, [run, movieId]);
 
-  // TODO: Make the function to convert the release date to how I want it and fall back to 'Loading...'
-  const releaseDateString = '';
+  const movieStatusVerbiage = data ? getMovieStatusVerbiage(data) : '';
   const poster = data?.poster_path ? `https://image.tmdb.org/t/p/w300${data.poster_path}` : noPosterAvail;
   const { title, tagline: tagLine, overview } = data ?? movieInfoPlaceHolder;
 
   const moviePageStyle = {
     position: 'absolute',
-    left: '25%',
-    width: '50%',
+    left: '20%',
+    width: '60%',
     height: '85vh',
   };
 
@@ -42,7 +42,7 @@ export const MoviePage = () => {
 
     if (isSuccess) {
       return (
-        <Box sx={moviePageStyle} paddingTop={6}>
+        <Box sx={moviePageStyle} paddingTop={4}>
           <Paper elevation={2}>
             <Grid container p={2} spacing={2}>
               <Grid item xs={12}>
@@ -56,7 +56,7 @@ export const MoviePage = () => {
                   <Grid item sm={8} xs={12}>
                     <Grid container>
                       <Grid item xs={11}>
-                        <Typography variant='h3' p={2}>
+                        <Typography variant='h3' pl={2}>
                           {title}
                         </Typography>
                       </Grid>
@@ -67,8 +67,8 @@ export const MoviePage = () => {
                         </IconButton>
                       </Grid>
                     </Grid>
-                    <Typography variant='h5' pl={2}>
-                      RELEASE DATE STRING HERE
+                    <Typography variant='h6' pl={2}>
+                      {movieStatusVerbiage ?? ''}
                     </Typography>
                     <Typography variant='h6' pl={2}>
                       DIRECTOR HERE
