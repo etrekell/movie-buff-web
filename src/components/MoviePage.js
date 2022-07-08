@@ -19,9 +19,9 @@ export const MoviePage = () => {
   const { run, data, error, isLoading, isSuccess, isIdle } = useAsync();
   // This allows us to pull the query params from the url out into variables
   const { movieId } = useParams();
+  const tmdbMoviePath = `${process.env.REACT_APP_TMDB_API_BASE_URL}/movie/${movieId}?api_key=${process.env.REACT_APP_TMDB_API_KEY}`;
 
   useEffect(() => {
-    const tmdbMoviePath = `${process.env.REACT_APP_TMDB_API_BASE_URL}/movie/${movieId}?api_key=${process.env.REACT_APP_TMDB_API_KEY}`;
     run(customFetch(tmdbMoviePath));
   }, [run, movieId]);
 
