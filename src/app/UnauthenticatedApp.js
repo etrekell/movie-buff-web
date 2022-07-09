@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 import { Button, Stack, Typography } from '@mui/material';
-import { MovieBuffLogo } from './MovieBuffLogo';
-import { LoginFormDialog } from './LoginFormDialog';
-import { RegisterFormDialog } from './RegisterFormDialog';
-import { centeredStyle } from './lib';
+import { MovieBuffLogo } from '../components/MovieBuffLogo';
+import { LoginFormDialog } from '../components/LoginFormDialog';
+import { RegisterFormDialog } from '../components/RegisterFormDialog';
+import { centeredStyle } from '../components/lib';
 
 export const UnauthenticatedApp = ({ login, register }) => {
   const [showDialog, setShowDialog] = useState('none');

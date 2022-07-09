@@ -1,8 +1,8 @@
 import React from 'react';
 import { Route, Routes } from 'react-router-dom';
-import { DiscoverPage } from './DiscoverPage';
-import { NotFoundPage } from './lib';
-import { MoviePage } from './MoviePage';
+import { DiscoverPage } from '../components/pages/DiscoverPage';
+import { NotFoundPage } from '../components/lib';
+import { MoviePage } from '../components/pages/MoviePage';
 
 export const AuthenticatedApp = () => {
   const AppRoutes = () => {

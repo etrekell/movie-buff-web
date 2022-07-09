@@ -1,6 +1,6 @@
 import React from 'react';
 import { Card, CardContent, Typography, CardMedia, Stack } from '@mui/material';
-import noPosterAvail from './../images/no-poster-avail.png';
+import noPosterAvail from '../../images/no-poster-avail.png';
 import { Link } from 'react-router-dom';
 
 export const MovieInfoCard = ({ title, overview, posterPath, id, releaseDate }) => {

@@ -1,6 +1,6 @@
 import React from 'react';
 import { Box, Card, CardContent, CardMedia, Typography } from '@mui/material';
-import noHeadshotAvail from '../images/no-headshot-avail.png';
+import noHeadshotAvail from '../../images/no-headshot-avail.png';
 
 export const ActorCard = ({ actor }) => {
   const { name, character, profile_path: profilePath } = actor ?? null;

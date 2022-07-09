@@ -1,7 +1,7 @@
 import * as React from 'react';
-import { auth } from '../firebaseConfig';
+import { auth } from '../../firebaseConfig';
 import { useEffect } from 'react';
-import { UnauthenticatedApp } from './UnauthenticatedApp';
+import { UnauthenticatedApp } from '../../app/UnauthenticatedApp';
 import {
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
@@ -10,10 +10,10 @@ import {
   onAuthStateChanged,
 } from 'firebase/auth';
 import { useNavigate } from 'react-router-dom';
-import { AuthenticatedApp } from './AuthenticatedApp';
-import { useAsync } from '../utilities/hooks/useAsync';
-import { FullPageLoadingSpinner, SomethingsWrongError } from './lib';
-import { AppBar } from './AppBar';
+import { AuthenticatedApp } from '../../app/AuthenticatedApp';
+import { useAsync } from '../../utilities/hooks/useAsync';
+import { FullPageLoadingSpinner, SomethingsWrongError } from '../lib';
+import { AppBar } from '../AppBar';
 
 const getUserFromAuth = async () => {
   return new Promise((resolve, reject) => {

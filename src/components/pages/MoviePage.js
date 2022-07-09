@@ -1,13 +1,13 @@
 import React, { useEffect } from 'react';
 import { Box, Grid, IconButton, Typography, Paper } from '@mui/material';
-import { FullPageLoadingSpinner, SomethingsWrongError } from './lib';
+import { FullPageLoadingSpinner, SomethingsWrongError } from '../lib';
 import { useParams } from 'react-router-dom';
-import { useAsync } from '../utilities/hooks/useAsync';
-import { customFetch } from '../utilities/customFetch';
-import noPosterAvail from '../images/no-poster-avail.png';
+import { useAsync } from '../../utilities/hooks/useAsync';
+import { customFetch } from '../../utilities/customFetch';
+import noPosterAvail from '../../images/no-poster-avail.png';
 import ThumbUpOffAltOutlinedIcon from '@mui/icons-material/ThumbUpOffAltOutlined';
-import { getMovieStatusVerbiage } from '../utilities/movieStatusUtil';
-import { MovieCast } from './MovieCast';
+import { getMovieStatusVerbiage } from '../../utilities/movieStatusUtil';
+import { MovieCast } from '../MovieCast';
 
 const movieInfoPlaceHolder = {
   title: '',

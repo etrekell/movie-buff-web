@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import { Box, Grid, Typography } from '@mui/material';
 import { useAsync } from '../utilities/hooks/useAsync';
 import { customFetch } from '../utilities/customFetch';
-import { ActorCard } from './ActorCard';
+import { ActorCard } from './cards/ActorCard';
 
 export const MovieCast = ({ movieId }) => {
   const { run, data, isSuccess } = useAsync();

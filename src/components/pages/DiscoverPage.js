@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import { Box, Stack, TextField, Typography } from '@mui/material';
-import { MovieInfoCard } from './MovieInfoCard';
-import { customFetch } from '../utilities/customFetch';
-import { useAsync } from '../utilities/hooks/useAsync';
-import { FullPageLoadingSpinner } from './lib';
+import { MovieInfoCard } from '../cards/MovieInfoCard';
+import { customFetch } from '../../utilities/customFetch';
+import { useAsync } from '../../utilities/hooks/useAsync';
+import { FullPageLoadingSpinner } from '../lib';
 
 export const DiscoverPage = () => {
   const { data, error, run, isLoading, isError, isSuccess } = useAsync();
