@@ -8,6 +8,7 @@ import noPosterAvail from '../../images/no-poster-avail.png';
 import ThumbUpOffAltOutlinedIcon from '@mui/icons-material/ThumbUpOffAltOutlined';
 import { getMovieStatusVerbiage } from '../../utilities/movieStatusUtil';
 import { MovieCast } from '../MovieCast';
+import { ReviewSection } from '../ReviewSection';
 
 const movieInfoPlaceHolder = {
   title: '',
@@ -79,6 +80,9 @@ export const MoviePage = () => {
               </Grid>
               <Grid item xs={12}>
                 <MovieCast movieId={movieId} />
+              </Grid>
+              <Grid item xs={12}>
+                <ReviewSection />
               </Grid>
             </Grid>
           </Paper>
