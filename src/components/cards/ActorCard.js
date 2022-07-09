@@ -2,6 +2,7 @@ import React from 'react';
 import { Box, Card, CardContent, CardMedia, Typography } from '@mui/material';
 import noHeadshotAvail from '../../images/no-headshot-avail.png';
 
+// TODO: Decide to keep this or delete? (along with the noHeadshotAvail file)
 export const ActorCard = ({ actor }) => {
   const { name, character, profile_path: profilePath } = actor ?? null;
   const headShot = profilePath ? `https://image.tmdb.org/t/p/w300${profilePath}` : noHeadshotAvail;
