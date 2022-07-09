@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { Box, Typography } from '@mui/material';
+import { Box, Grid, Typography } from '@mui/material';
 import { useAsync } from '../utilities/hooks/useAsync';
 import { customFetch } from '../utilities/customFetch';
 import { ActorCard } from './ActorCard';
@@ -10,17 +10,21 @@ export const MovieCast = ({ movieId }) => {
 
   useEffect(() => {
     run(customFetch(tmdbCreditsPath));
-  }, [run]);
+  }, [run, tmdbCreditsPath]);
 
   const mainCast = data?.cast.slice(0, 10) ?? null;
 
   return isSuccess && mainCast ? (
-    <Box>
+    <>
       <Typography variant='h5'>Staring:</Typography>
-      {mainCast.map((actor) => (
-        <ActorCard key={actor.id} actor={actor} />
-      ))}
-    </Box>
+      <Grid container justifyContent='space-evenly'>
+        {mainCast.map((actor) => (
+          <Box p={2}>
+            <ActorCard key={actor.id} actor={actor} />
+          </Box>
+        ))}
+      </Grid>
+    </>
   ) : (
     <></>
   );
