@@ -19,8 +19,8 @@ export const MovieCast = ({ movieId }) => {
       <Typography variant='h5'>Staring:</Typography>
       <Grid container justifyContent='space-evenly'>
         {mainCast.map((actor) => (
-          <Box p={2}>
-            <ActorCard key={actor.id} actor={actor} />
+          <Box p={2} key={actor.id}>
+            <ActorCard actor={actor} />
           </Box>
         ))}
       </Grid>
