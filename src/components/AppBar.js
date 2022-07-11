@@ -4,12 +4,12 @@ import { MovieBuffLogo } from './MovieBuffLogo';
 import { NavButton } from './lib';
 import { theme } from '../app/MuiAppTheme';
 import { useNavigate } from 'react-router-dom';
+import { SmallAvatar } from './SmallAvatar';
 
 export const AppBar = ({ user, logout }) => {
   const navigate = useNavigate();
 
   // TODO: Do something better here (Like the dropdown to either login or logout)
-  const displayName = user ? user.displayName : '????';
   return (
     <MuiAppBar position='static' sx={{ background: theme.palette.primary.dark }}>
       <Toolbar variant='dense'>
@@ -27,7 +27,9 @@ export const AppBar = ({ user, logout }) => {
         </Box>
         <Stack direction='row' spacing={2}>
           {/* TODO: Do something better here (Like the dropdown to either login or logout)*/}
-          <Button color='inherit'>User: {displayName}</Button>
+          <Button color='inherit'>
+            <SmallAvatar displayName={user?.displayName} imageURL={user?.photoURL} />
+          </Button>
           <Button onClick={logout} color='inherit'>
             Logout
           </Button>
