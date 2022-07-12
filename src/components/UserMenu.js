@@ -1,5 +1,10 @@
 import React, { useState } from 'react';
-import { Button, Divider, Menu, MenuItem, Typography } from '@mui/material';
+import { Button, Divider, ListItemIcon, ListItemText, Menu, MenuItem, Typography } from '@mui/material';
+import LoginOutlinedIcon from '@mui/icons-material/LoginOutlined';
+import LogoutOutlinedIcon from '@mui/icons-material/LogoutOutlined';
+import AppRegistrationOutlinedIcon from '@mui/icons-material/AppRegistrationOutlined';
+import SettingsOutlinedIcon from '@mui/icons-material/SettingsOutlined';
+import PersonOutlineOutlinedIcon from '@mui/icons-material/PersonOutlineOutlined';
 import { SmallAvatar } from './SmallAvatar';
 import { BasicDialog } from './BasicDialog';
 import { LoginFormDialog } from './LoginFormDialog';
@@ -41,8 +46,18 @@ export const UserMenu = ({ user, logout, login, register }) => {
           {user?.displayName ?? ''}
         </Typography>
         <Divider sx={{ paddingTop: '6px' }} />
-        <MenuItem onClick={handleSettingsClick}>Settings</MenuItem>
-        <MenuItem onClick={handleLogoutClick}>Logout</MenuItem>
+        <MenuItem onClick={handleSettingsClick}>
+          <ListItemIcon>
+            <SettingsOutlinedIcon />
+          </ListItemIcon>
+          <ListItemText>Settings</ListItemText>
+        </MenuItem>
+        <MenuItem onClick={handleLogoutClick}>
+          <ListItemIcon>
+            <LogoutOutlinedIcon />
+          </ListItemIcon>
+          <ListItemText>Logout</ListItemText>
+        </MenuItem>
       </>
     );
   };
@@ -50,8 +65,18 @@ export const UserMenu = ({ user, logout, login, register }) => {
   const LoggedOutMenu = () => {
     return (
       <>
-        <MenuItem onClick={handleLoginClick}>Log in</MenuItem>
-        <MenuItem onClick={handleRegisterClick}>Register</MenuItem>
+        <MenuItem onClick={handleLoginClick}>
+          <ListItemIcon>
+            <LoginOutlinedIcon />
+          </ListItemIcon>
+          <ListItemText>Login</ListItemText>
+        </MenuItem>
+        <MenuItem onClick={handleRegisterClick}>
+          <ListItemIcon>
+            <AppRegistrationOutlinedIcon />
+          </ListItemIcon>
+          <ListItemText>Register</ListItemText>
+        </MenuItem>
       </>
     );
   };
