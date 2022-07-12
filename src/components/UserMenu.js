@@ -50,8 +50,8 @@ export const UserMenu = ({ user, logout, login, register }) => {
   const LoggedOutMenu = () => {
     return (
       <>
-        <MenuItem onClick={handleRegisterClick}>Register</MenuItem>
         <MenuItem onClick={handleLoginClick}>Log in</MenuItem>
+        <MenuItem onClick={handleRegisterClick}>Register</MenuItem>
       </>
     );
   };
