@@ -4,7 +4,6 @@ import LoginOutlinedIcon from '@mui/icons-material/LoginOutlined';
 import LogoutOutlinedIcon from '@mui/icons-material/LogoutOutlined';
 import AppRegistrationOutlinedIcon from '@mui/icons-material/AppRegistrationOutlined';
 import SettingsOutlinedIcon from '@mui/icons-material/SettingsOutlined';
-import PersonOutlineOutlinedIcon from '@mui/icons-material/PersonOutlineOutlined';
 import { SmallAvatar } from './SmallAvatar';
 import { BasicDialog } from './BasicDialog';
 import { LoginFormDialog } from './LoginFormDialog';
