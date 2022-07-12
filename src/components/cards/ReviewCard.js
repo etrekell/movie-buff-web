@@ -2,6 +2,7 @@ import React from 'react';
 import { Box, Card, CardContent, Stack, Typography } from '@mui/material';
 
 export const ReviewCard = () => {
+  //TODO: finish this
   return (
     <Box paddingY={2} paddingX={6}>
       <Card>
