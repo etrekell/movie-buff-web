@@ -91,7 +91,7 @@ export const MovieBuffPage = () => {
 
   return (
     <>
-      <AppBar user={user} logout={logout} />
+      <AppBar user={user} logout={logout} login={login} register={register} />
       {getStatusBasedComponent()}
     </>
   );
