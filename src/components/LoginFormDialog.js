@@ -12,7 +12,7 @@ import {
 import Visibility from '@mui/icons-material/Visibility';
 import VisibilityOff from '@mui/icons-material/VisibilityOff';
 
-export const LoginFormDialog = ({ showDialog, setOpenDialog, onSubmit }) => {
+export const LoginFormDialog = ({ showDialog, setShowDialog, onSubmit }) => {
   const [showPassword, setShowPassword] = useState(false);
   const dialogTitle = 'Login';
 
@@ -20,7 +20,7 @@ export const LoginFormDialog = ({ showDialog, setOpenDialog, onSubmit }) => {
     e.preventDefault();
     const { email, password } = e.target.elements;
     onSubmit({ email: email.value, password: password.value });
-    setOpenDialog('none');
+    setShowDialog('none');
   };
 
   return (
@@ -66,7 +66,7 @@ export const LoginFormDialog = ({ showDialog, setOpenDialog, onSubmit }) => {
           <Button type='submit' variant='contained'>
             {dialogTitle}
           </Button>
-          <Button onClick={() => setOpenDialog('none')}>Close</Button>
+          <Button onClick={() => setShowDialog('none')}>Close</Button>
         </DialogActions>
       </form>
     </Dialog>

@@ -3,7 +3,7 @@ import { Button, Dialog, DialogActions, DialogContent, DialogTitle, Typography }
 
 export const BasicDialog = ({
   showDialog,
-  setOpenDialog,
+  setShowDialog,
   title,
   body = '',
   primaryButtonText = 'Ok',
@@ -15,14 +15,14 @@ export const BasicDialog = ({
     if (primaryAction) {
       primaryAction();
     }
-    setOpenDialog('none');
+    setShowDialog('none');
   };
 
   const handleSecondaryClick = () => {
     if (secondaryAction) {
       secondaryAction();
     }
-    setOpenDialog('none');
+    setShowDialog('none');
   };
 
   return (

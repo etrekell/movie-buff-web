@@ -22,8 +22,8 @@ export const UnauthenticatedApp = ({ login, register }) => {
           </Button>
         </Stack>
       </div>
-      <LoginFormDialog showDialog={showDialog === 'login'} setOpenDialog={setShowDialog} onSubmit={login} />
-      <RegisterFormDialog showDialog={showDialog === 'register'} setOpenDialog={setShowDialog} onSubmit={register} />
+      <LoginFormDialog showDialog={showDialog === 'login'} setShowDialog={setShowDialog} onSubmit={login} />
+      <RegisterFormDialog showDialog={showDialog === 'register'} setShowDialog={setShowDialog} onSubmit={register} />
     </>
   );
 };

@@ -12,7 +12,7 @@ import {
 import Visibility from '@mui/icons-material/Visibility';
 import VisibilityOff from '@mui/icons-material/VisibilityOff';
 
-export const RegisterFormDialog = ({ showDialog, setOpenDialog, onSubmit }) => {
+export const RegisterFormDialog = ({ showDialog, setShowDialog, onSubmit }) => {
   const dialogTitle = 'Register';
   const [showPassword, setShowPassword] = useState(false);
 
@@ -22,7 +22,7 @@ export const RegisterFormDialog = ({ showDialog, setOpenDialog, onSubmit }) => {
     // i.e., whatever you named the id for the input field
     const { email, username, password } = e.target.elements;
     onSubmit({ email: email.value, username: username.value, password: password.value });
-    setOpenDialog('none');
+    setShowDialog('none');
   };
 
   return (
@@ -78,7 +78,7 @@ export const RegisterFormDialog = ({ showDialog, setOpenDialog, onSubmit }) => {
           <Button type='submit' variant='contained'>
             {dialogTitle}
           </Button>
-          <Button onClick={() => setOpenDialog('none')}>Close</Button>
+          <Button onClick={() => setShowDialog('none')}>Close</Button>
         </DialogActions>
       </form>
     </Dialog>

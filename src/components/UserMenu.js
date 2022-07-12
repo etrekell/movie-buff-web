@@ -83,22 +83,20 @@ export const UserMenu = ({ user, logout, login, register }) => {
       </Menu>
       <BasicDialog
         showDialog={showDialog === 'settings'}
-        setOpenDialog={setShowDialog}
+        setShowDialog={setShowDialog}
         title='Settings'
         body='No current settings options. Coming soon!'
-        // secondaryAction={() => console.log('secondary button pressed')}
-        primaryAction={() => console.log('primary button pressed')}
       />
       <BasicDialog
         showDialog={showDialog === 'logout'}
-        setOpenDialog={setShowDialog}
+        setShowDialog={setShowDialog}
         title='Are you sure you want to logout?'
-        secondaryAction={() => console.log('cancel button pressed')}
+        secondaryAction={() => setShowDialog('none')}
         primaryButtonText='Yes'
         primaryAction={logout}
       />
-      <LoginFormDialog showDialog={showDialog === 'login'} setOpenDialog={setShowDialog} onSubmit={login} />
-      <RegisterFormDialog showDialog={showDialog === 'register'} setOpenDialog={setShowDialog} onSubmit={register} />
+      <LoginFormDialog showDialog={showDialog === 'login'} setShowDialog={setShowDialog} onSubmit={login} />
+      <RegisterFormDialog showDialog={showDialog === 'register'} setShowDialog={setShowDialog} onSubmit={register} />
     </>
   );
 };
