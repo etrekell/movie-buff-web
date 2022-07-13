@@ -16,7 +16,7 @@ const movieInfoPlaceHolder = {
   overview: '',
 };
 
-export const MoviePage = () => {
+export const MoviePage = ({ user }) => {
   const { run, data, error, isLoading, isSuccess, isIdle } = useAsync();
   // This allows us to pull the query params from the url out into variables
   const { movieId } = useParams();
@@ -24,7 +24,7 @@ export const MoviePage = () => {
 
   useEffect(() => {
     run(customFetch(tmdbMoviePath));
-  }, [run, movieId]);
+  }, [run, tmdbMoviePath]);
 
   const movieStatusVerbiage = data ? getMovieStatusVerbiage(data) : '';
   const poster = data?.poster_path ? `https://image.tmdb.org/t/p/w300${data.poster_path}` : noPosterAvail;
@@ -82,7 +82,7 @@ export const MoviePage = () => {
                 <MovieCast movieId={movieId} />
               </Grid>
               <Grid item xs={12}>
-                <ReviewSection />
+                <ReviewSection movieId={movieId} user={user} />
               </Grid>
             </Grid>
           </Paper>

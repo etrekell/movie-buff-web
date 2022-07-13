@@ -75,15 +75,7 @@ export const MovieBuffPage = () => {
     }
 
     if (isSuccess) {
-      return (
-        <>
-          {user ? (
-            <AuthenticatedApp user={user} logout={logout} />
-          ) : (
-            <UnauthenticatedApp login={login} register={register} />
-          )}
-        </>
-      );
+      return <>{user ? <AuthenticatedApp user={user} /> : <UnauthenticatedApp login={login} register={register} />}</>;
     }
     // if isError or anything else (Should never be anything else at this point but adding as a fallback)
     return <SomethingsWrongError errorMessage={error ? error.message : null} />;
