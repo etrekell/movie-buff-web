@@ -6,7 +6,6 @@ import { db } from '../firebaseConfig';
 import { useAsync } from '../utilities/hooks/useAsync';
 
 export const ReviewSection = ({ movieId, user }) => {
-  // TODO: If reviews array is empty say something like "This movie has no reviews, you should write one!" (with a link)
   // TODO: Sort the reviews array so that the logged in users reviews are on top. Maybe give them a different color or something
   // TODO: Make sure to do a status based component approach (Already have seen it where they don't load)
 
@@ -26,9 +25,16 @@ export const ReviewSection = ({ movieId, user }) => {
         <Typography variant='h5'>Audience Reviews</Typography>
       </Divider>
       {isSuccess ? (
-        reviews.map((review) => (
-          <ReviewCard key={review.id} review={review} currentUserIsAuthor={currentUserIsAuthor(review.authorUid)} />
-        ))
+        reviews.length ? (
+          reviews.map((review) => (
+            <ReviewCard key={review.id} review={review} currentUserIsAuthor={currentUserIsAuthor(review.authorUid)} />
+          ))
+        ) : (
+          // TODO: Once review posting is implemented, add a link here for the user to post one
+          <Typography variant='subtitle1' sx={{ textAlign: 'center', fontSize: '1em' }}>
+            This movie has no reviews, you should write one!
+          </Typography>
+        )
       ) : (
         <></>
       )}
