@@ -6,7 +6,6 @@ import { db } from '../firebaseConfig';
 import { useAsync } from '../utilities/hooks/useAsync';
 
 export const ReviewSection = ({ movieId, user }) => {
-  // TODO: Sort the reviews array so that the logged in users reviews are on top. Maybe give them a different color or something
   // TODO: Make sure to do a status based component approach (Already have seen it where they don't load)
 
   const { data, run, isLoading, isIdle, isSuccess, error } = useAsync();
@@ -17,7 +16,12 @@ export const ReviewSection = ({ movieId, user }) => {
   }, [run, movieId]);
 
   const currentUserIsAuthor = (authorUid) => authorUid === user.uid;
-  const reviews = isSuccess ? data.docs.map((doc) => ({ ...doc.data(), id: doc.id })) : [];
+  const reviews = isSuccess
+    ? data.docs
+        .map((doc) => ({ ...doc.data(), id: doc.id }))
+        // Puts current users reviews at the top
+        .sort((a, b) => (currentUserIsAuthor(a.authorUid) ? -1 : 1))
+    : [];
 
   return (
     <>
