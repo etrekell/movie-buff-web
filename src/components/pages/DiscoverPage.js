@@ -1,14 +1,32 @@
 import React, { useEffect, useState } from 'react';
-import { Box, Stack, TextField, Typography } from '@mui/material';
+import { Box, Button, ButtonGroup, Stack, TextField, Typography } from '@mui/material';
 import { MovieInfoCard } from '../cards/MovieInfoCard';
 import { customFetch } from '../../utilities/customFetch';
 import { useAsync } from '../../utilities/hooks/useAsync';
 import { FullPageLoadingSpinner } from '../lib';
 
+const getBrowsePath = (browseBy) => {
+  switch (browseBy) {
+    case 'trending':
+      return `${process.env.REACT_APP_TMDB_API_BASE_URL}/trending/movie/week?api_key=${process.env.REACT_APP_TMDB_API_KEY}`;
+    case 'popular':
+      return `${process.env.REACT_APP_TMDB_API_BASE_URL}/movie/popular?api_key=${process.env.REACT_APP_TMDB_API_KEY}&language=en-US&page=1`;
+    case 'nowPlaying':
+      return `${process.env.REACT_APP_TMDB_API_BASE_URL}/movie/now_playing?api_key=${process.env.REACT_APP_TMDB_API_KEY}&language=en-US&page=1`;
+    case 'upcoming':
+      return `${process.env.REACT_APP_TMDB_API_BASE_URL}/movie/upcoming?api_key=${process.env.REACT_APP_TMDB_API_KEY}&language=en-US&page=1`;
+    case 'topRated':
+      return `${process.env.REACT_APP_TMDB_API_BASE_URL}/movie/top_rated?api_key=${process.env.REACT_APP_TMDB_API_KEY}&language=en-US&page=1`;
+    default:
+      return `${process.env.REACT_APP_TMDB_API_BASE_URL}/trending/movie/week?api_key=${process.env.REACT_APP_TMDB_API_KEY}`;
+  }
+};
+
 export const DiscoverPage = () => {
   const { data, error, run, isLoading, isError, isSuccess } = useAsync();
   const [query, setQuery] = useState('');
   const [queried, setQueried] = useState(false);
+  const [browseBy, setBrowseBy] = useState('trending');
   // encodeURIComponent properly serializes strings to be used in a URL, For example, it replaces strings with "%20"
   const tmdbSearchPath = `${process.env.REACT_APP_TMDB_API_BASE_URL}/search/movie?api_key=${
     process.env.REACT_APP_TMDB_API_KEY
@@ -29,30 +47,48 @@ export const DiscoverPage = () => {
   };
 
   useEffect(() => {
-    // This prevents useEffect from running on the initial render
-    if (!queried) {
+    if (queried) {
+      run(customFetch(tmdbSearchPath));
+      setBrowseBy('');
       return;
     }
-    run(customFetch(tmdbSearchPath));
+    run(customFetch(getBrowsePath(browseBy)));
     // Only make this call when one of these changes
-  }, [queried, query, run, tmdbSearchPath]);
+  }, [queried, query, run, tmdbSearchPath, browseBy]);
 
   return (
     <Stack spacing={2} alignItems='center'>
-      <form onSubmit={handleSubmit}>
-        <TextField
-          sx={{ width: '600px', margin: '25px' }}
-          label='Search for a movie'
-          id='search'
-          variant='outlined'
-          size='small'
-          type='text'
-          aria-label='search'
-        />
-      </form>
-
+      <Box sx={{ paddingTop: '20px' }}>
+        <form onSubmit={handleSubmit}>
+          <TextField
+            sx={{ width: '600px' }}
+            label='Search for a movie'
+            id='search'
+            variant='outlined'
+            size='small'
+            type='text'
+            aria-label='search'
+          />
+        </form>
+      </Box>
+      <ButtonGroup variant='text' aria-label='browse button group'>
+        <Button onClick={() => setBrowseBy('trending')} disabled={browseBy === 'trending'}>
+          Trending
+        </Button>
+        <Button onClick={() => setBrowseBy('popular')} disabled={browseBy === 'popular'}>
+          Popular
+        </Button>
+        <Button onClick={() => setBrowseBy('nowPlaying')} disabled={browseBy === 'nowPlaying'}>
+          Now Playing
+        </Button>
+        <Button onClick={() => setBrowseBy('upcoming')} disabled={browseBy === 'upcoming'}>
+          Upcoming
+        </Button>
+        <Button onClick={() => setBrowseBy('topRated')} disabled={browseBy === 'topRated'}>
+          Top Rated
+        </Button>
+      </ButtonGroup>
       {isLoading ? <FullPageLoadingSpinner /> : null}
-
       {isError ? (
         <Box>
           <Typography variant='subtitle1' color='error'>
@@ -64,7 +100,6 @@ export const DiscoverPage = () => {
           </Typography>
         </Box>
       ) : null}
-
       {isSuccess ? (
         data.results.length ? (
           <Stack spacing={4}>
