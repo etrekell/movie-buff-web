@@ -9,7 +9,6 @@ export const MovieActionButtonGroup = () => {
     <>
       {/*TODO: Figure this out for favoriting a movie. Maybe use ToggleButton? (And add tooltip)*/}
       <Stack direction='row'>
-        {/* TODO: Move the tooltips to the left or right so they don't overlap on the other buttons*/}
         {/* TODO: Make these buttons dynamic and turn on / off based on if the user has them favorited, etc.*/}
         <Tooltip title='Add to your favorites'>
           <IconButton>
