@@ -1,14 +1,14 @@
 import React, { useEffect } from 'react';
-import { Box, Grid, IconButton, Typography, Paper } from '@mui/material';
+import { Box, Grid, Typography, Paper } from '@mui/material';
 import { FullPageLoadingSpinner, SomethingsWrongError } from '../lib';
 import { useParams } from 'react-router-dom';
 import { useAsync } from '../../utilities/hooks/useAsync';
 import { customFetch } from '../../utilities/customFetch';
 import noPosterAvail from '../../images/no-poster-avail.png';
-import ThumbUpOffAltOutlinedIcon from '@mui/icons-material/ThumbUpOffAltOutlined';
 import { getMovieStatusVerbiage } from '../../utilities/movieStatusUtil';
 import { MovieCast } from '../MovieCast';
 import { ReviewSection } from '../ReviewSection';
+import { MovieActionButtonGroup } from '../MovieActionButtonGroup';
 
 const movieInfoPlaceHolder = {
   title: '',
@@ -55,26 +55,33 @@ export const MoviePage = ({ user }) => {
                       {tagLine ? `"${tagLine}"` : ''}
                     </Typography>
                   </Grid>
-                  <Grid item sm={8} xs={12}>
+                  <Grid item sm={8}>
                     <Grid container>
-                      <Grid item xs={11}>
-                        <Typography variant='h3' pl={2}>
+                      <Grid item xs={9}>
+                        <Typography variant='h3' pl={1.5}>
                           {title}
                         </Typography>
                       </Grid>
-                      <Grid item xs={1}>
-                        {/*TODO: Figure this out for favoriting a movie. Maybe use ToggleButton? (And add tooltip)*/}
-                        <IconButton>
-                          <ThumbUpOffAltOutlinedIcon />
-                        </IconButton>
+                      <Grid
+                        item
+                        sx={{
+                          display: 'flex',
+                          flexDirection: 'column',
+                          alignItems: 'end',
+                        }}>
+                        <MovieActionButtonGroup />
                       </Grid>
                     </Grid>
-                    <Typography variant='h6' pl={2}>
-                      {movieStatusVerbiage ?? ''}
-                    </Typography>
-                    <Typography variant='subtitle2' p={2} fontSize='1em'>
-                      {overview}
-                    </Typography>
+                    <Grid item xs={12}>
+                      <Typography variant='h6' pl={2} pt={1}>
+                        {movieStatusVerbiage ?? ''}
+                      </Typography>
+                    </Grid>
+                    <Grid item xs={12}>
+                      <Typography variant='subtitle2' p={2} fontSize='1em'>
+                        {overview}
+                      </Typography>
+                    </Grid>
                   </Grid>
                 </Grid>
               </Grid>
