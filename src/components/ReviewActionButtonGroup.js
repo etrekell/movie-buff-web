@@ -4,11 +4,22 @@ import CreateOutlinedIcon from '@mui/icons-material/CreateOutlined';
 import DeleteIcon from '@mui/icons-material/Delete';
 import { ReviewFormDialog } from './ReviewFormDialog';
 import { BasicDialog } from './BasicDialog';
+import { useAsync } from '../utilities/hooks/useAsync';
+import { doc, deleteDoc } from 'firebase/firestore';
+import { db } from '../firebaseConfig';
 
 export const ReviewActionButtonGroup = ({ movieTitle, movieId, userUid }) => {
   const [showDialog, setShowDialog] = useState('none');
+  const { run } = useAsync();
 
   // TODO: Add functionality for these buttons.
+  // TODO: Use the async status for anything? Maybe the toast idea?
+
+  const handleReviewDelete = () => {
+    // This is the format I'm using for a review document id
+    const reviewDocumentId = `${userUid}-${movieId}`;
+    run(deleteDoc(doc(db, 'movie-reviews', reviewDocumentId)));
+  };
 
   return (
     <>
@@ -33,6 +44,7 @@ export const ReviewActionButtonGroup = ({ movieTitle, movieId, userUid }) => {
         primaryButtonText='Delete'
         // TODO: Add the primary action (deleting the record)
         secondaryAction={() => setShowDialog('none')}
+        primaryAction={handleReviewDelete}
       />
       <ReviewFormDialog
         showDialog={showDialog === 'review'}

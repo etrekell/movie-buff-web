@@ -3,9 +3,9 @@ import { Card, CardContent, Typography, CardMedia, Stack } from '@mui/material';
 import noPosterAvail from '../../images/no-poster-avail.png';
 import { Link } from 'react-router-dom';
 
-export const MovieInfoCard = ({ title, overview, posterPath, id, releaseDate }) => {
+export const MovieInfoCard = ({ movieTitle, overview, posterPath, id, releaseDate }) => {
   const poster = posterPath ? `https://image.tmdb.org/t/p/w300${posterPath}` : noPosterAvail;
-  const posterAlt = posterPath ? `${title} poster` : 'No poster available';
+  const posterAlt = posterPath ? `${movieTitle} poster` : 'No poster available';
   const releaseYear = releaseDate ? releaseDate.slice(0, 4) : null;
 
   return (
@@ -21,7 +21,7 @@ export const MovieInfoCard = ({ title, overview, posterPath, id, releaseDate }) 
         <CardContent>
           <Stack direction={'column'} spacing={1}>
             <Typography variant='h4' component='div'>
-              {title}
+              {movieTitle}
             </Typography>
             <Typography variant='h6' component='div'>
               {releaseYear}

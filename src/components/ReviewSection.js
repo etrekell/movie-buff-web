@@ -33,7 +33,13 @@ export const ReviewSection = ({ movieId, movieTitle, user }) => {
       {isSuccess ? (
         reviews.length ? (
           reviews.map((review) => (
-            <ReviewCard key={review.id} review={review} currentUserIsAuthor={currentUserIsAuthor(review.authorUid)} />
+            <ReviewCard
+              key={review.id}
+              review={review}
+              currentUserIsAuthor={currentUserIsAuthor(review.authorUid)}
+              userId={user.uid}
+              movieTitle={movieTitle}
+            />
           ))
         ) : (
           <>

@@ -1,6 +1,6 @@
 import React from 'react';
 import { Button, Dialog, DialogActions, DialogContent, DialogTitle, TextField } from '@mui/material';
-import { addDoc, collection } from 'firebase/firestore';
+import { doc, setDoc } from 'firebase/firestore';
 import { db } from '../firebaseConfig';
 import { useAsync } from '../utilities/hooks/useAsync';
 
@@ -14,7 +14,7 @@ export const ReviewFormDialog = ({ showDialog, setShowDialog, movieTitle, movieI
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    const reviewInfo = {
+    const reviewData = {
       authorUid: userUid,
       content: e.target.reviewContent.value,
       createdOn: '',
@@ -22,7 +22,9 @@ export const ReviewFormDialog = ({ showDialog, setShowDialog, movieTitle, movieI
       movieId: movieId,
     };
 
-    run(addDoc(collection(db, 'movie-reviews'), reviewInfo));
+    // This is the format I'm using for a review document id
+    const reviewDocumentId = `${userUid}-${movieId}`;
+    run(setDoc(doc(db, 'movie-reviews', reviewDocumentId), reviewData));
     setShowDialog('none');
   };
 

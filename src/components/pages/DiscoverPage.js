@@ -105,7 +105,7 @@ export const DiscoverPage = () => {
           <Stack spacing={4}>
             {data.results.map(({ title, overview, poster_path, id, release_date }) => (
               <MovieInfoCard
-                title={title}
+                movieTitle={title}
                 overview={overview}
                 posterPath={poster_path}
                 releaseDate={release_date}
