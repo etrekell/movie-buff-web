@@ -4,6 +4,7 @@ import { doc, getDoc } from 'firebase/firestore';
 import { db } from '../../firebaseConfig';
 import { useAsync } from '../../utilities/hooks/useAsync';
 import { SmallAvatar } from '../SmallAvatar';
+import { ReviewActionButtonGroup } from '../ReviewActionButtonGroup';
 
 export const ReviewCard = ({ review, currentUserIsAuthor }) => {
   //TODO: finish this
@@ -31,13 +32,15 @@ export const ReviewCard = ({ review, currentUserIsAuthor }) => {
     <Box paddingY={2} paddingX={6}>
       <Card>
         <CardContent>
-          <Stack direction={'column'}>
-            <Stack direction='row' spacing={1}>
-              <SmallAvatar displayName={authorInfo.displayName} imageURL={authorInfo.photoURL ?? ''} />
-              <Typography variant='subtitle1' component='div'>
-                {/*TODO: Once we can update reviews, put that option here*/}
-                {currentUserIsAuthor ? 'You' : authorInfo.displayName ?? ''}
-              </Typography>
+          <Stack>
+            <Stack direction='row' justifyContent='space-between'>
+              <Stack direction='row' spacing={1}>
+                <SmallAvatar displayName={authorInfo.displayName} imageURL={authorInfo.photoURL ?? ''} />
+                <Typography variant='subtitle1' component='div'>
+                  {currentUserIsAuthor ? 'You' : authorInfo.displayName ?? ''}
+                </Typography>
+              </Stack>
+              {currentUserIsAuthor ? <ReviewActionButtonGroup /> : <></>}
             </Stack>
             <Typography variant='subtitle2' component='div' color='text.secondary'>
               Reviewed on Review date here
