@@ -1,10 +1,13 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { IconButton, Stack, Tooltip } from '@mui/material';
 import FavoriteBorderOutlinedIcon from '@mui/icons-material/FavoriteBorderOutlined';
 import PlaylistAddCheckOutlinedIcon from '@mui/icons-material/PlaylistAddCheckOutlined';
 import CreateOutlinedIcon from '@mui/icons-material/CreateOutlined';
+import { ReviewFormDialog } from './ReviewFormDialog';
 
-export const MovieActionButtonGroup = () => {
+export const MovieActionButtonGroup = ({ movieTitle }) => {
+  const [showReviewDialog, setShowReviewDialog] = useState(false);
+
   return (
     <>
       {/*TODO: Figure this out for favoriting a movie. Maybe use ToggleButton? (And add tooltip)*/}
@@ -21,11 +24,12 @@ export const MovieActionButtonGroup = () => {
           </IconButton>
         </Tooltip>
         <Tooltip title='Write a review'>
-          <IconButton>
+          <IconButton onClick={() => setShowReviewDialog(true)}>
             <CreateOutlinedIcon size='large' />
           </IconButton>
         </Tooltip>
       </Stack>
+      <ReviewFormDialog movieTitle={movieTitle} showDialog={showReviewDialog} setShowDialog={setShowReviewDialog} />
     </>
   );
 };
