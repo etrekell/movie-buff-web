@@ -10,7 +10,7 @@ export const ReviewSection = ({ movieId, movieTitle, user }) => {
   // TODO: Make sure to do a status based component approach (Already have seen it where they don't load)
 
   const { data, run, isLoading, isIdle, isSuccess, error } = useAsync();
-  const [showReviewDialog, setShowReviewDialog] = useState(false);
+  const [showDialog, setShowDialog] = useState('none');
 
   useEffect(() => {
     const movieReviewQuery = query(collection(db, 'movie-reviews'), where('movieId', '==', movieId));
@@ -42,7 +42,7 @@ export const ReviewSection = ({ movieId, movieTitle, user }) => {
                 This movie doesn't have any reviews yet.
               </Typography>
               <Box textAlign='center'>
-                <Button onClick={() => setShowReviewDialog(true)} style={{ maxWidth: '100px' }}>
+                <Button onClick={() => setShowDialog('review')} style={{ maxWidth: '100px' }}>
                   Write one!
                 </Button>
               </Box>
@@ -53,8 +53,8 @@ export const ReviewSection = ({ movieId, movieTitle, user }) => {
         <></>
       )}
       <ReviewFormDialog
-        showDialog={showReviewDialog}
-        setShowDialog={setShowReviewDialog}
+        showDialog={showDialog === 'review'}
+        setShowDialog={setShowDialog}
         movieTitle={movieTitle}
         movieId={movieId}
         userUid={user.uid}

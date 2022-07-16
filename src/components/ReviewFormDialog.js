@@ -23,7 +23,7 @@ export const ReviewFormDialog = ({ showDialog, setShowDialog, movieTitle, movieI
     };
 
     run(addDoc(collection(db, 'movie-reviews'), reviewInfo));
-    setShowDialog(false);
+    setShowDialog('none');
   };
 
   return (
@@ -38,6 +38,7 @@ export const ReviewFormDialog = ({ showDialog, setShowDialog, movieTitle, movieI
             fullWidth
             autoFocus
             id='reviewContent'
+            // TODO: style movie title as bold or something to make it stand out a bit
             placeholder={`I thought ${movieTitle} was...`}
             variant='outlined'
             size='small'
@@ -50,7 +51,7 @@ export const ReviewFormDialog = ({ showDialog, setShowDialog, movieTitle, movieI
           <Button type='submit' variant='contained'>
             Submit
           </Button>
-          <Button onClick={() => setShowDialog(false)}>Back</Button>
+          <Button onClick={() => setShowDialog('none')}>Back</Button>
         </DialogActions>
       </form>
     </Dialog>

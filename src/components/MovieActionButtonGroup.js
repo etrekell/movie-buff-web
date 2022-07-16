@@ -6,7 +6,7 @@ import CreateOutlinedIcon from '@mui/icons-material/CreateOutlined';
 import { ReviewFormDialog } from './ReviewFormDialog';
 
 export const MovieActionButtonGroup = ({ movieTitle, movieId, userUid }) => {
-  const [showReviewDialog, setShowReviewDialog] = useState(false);
+  const [showDialog, setShowDialog] = useState('none');
 
   return (
     <>
@@ -24,14 +24,14 @@ export const MovieActionButtonGroup = ({ movieTitle, movieId, userUid }) => {
           </IconButton>
         </Tooltip>
         <Tooltip title='Write a review'>
-          <IconButton onClick={() => setShowReviewDialog(true)}>
+          <IconButton onClick={() => setShowDialog('review')}>
             <CreateOutlinedIcon size='large' />
           </IconButton>
         </Tooltip>
       </Stack>
       <ReviewFormDialog
-        showDialog={showReviewDialog}
-        setShowDialog={setShowReviewDialog}
+        showDialog={showDialog === 'review'}
+        setShowDialog={setShowDialog}
         movieTitle={movieTitle}
         movieId={movieId}
         userUid={userUid}
