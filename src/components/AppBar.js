@@ -24,9 +24,7 @@ export const AppBar = ({ user, logout, login, register }) => {
             <NavButton path='/fake'>Fake</NavButton>
           </Stack>
         </Box>
-        <Stack direction='row' spacing={2}>
-          <UserMenu user={user} logout={logout} login={login} register={register} />
-        </Stack>
+        <UserMenu user={user} logout={logout} login={login} register={register} />
       </Toolbar>
     </MuiAppBar>
   );
