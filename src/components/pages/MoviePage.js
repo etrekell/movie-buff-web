@@ -69,7 +69,7 @@ export const MoviePage = ({ user }) => {
                           flexDirection: 'column',
                           alignItems: 'end',
                         }}>
-                        <MovieActionButtonGroup movieTitle={title} />
+                        <MovieActionButtonGroup movieTitle={title} movieId={movieId} userUid={user.uid} />
                       </Grid>
                     </Grid>
                     <Grid item xs={12}>
