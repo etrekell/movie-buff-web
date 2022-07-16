@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { Divider, Typography } from '@mui/material';
+import { Box, Button, Divider, Stack, Typography } from '@mui/material';
 import { ReviewCard } from './cards/ReviewCard';
 import { getDocs, collection, query, where } from 'firebase/firestore';
 import { db } from '../firebaseConfig';
@@ -34,10 +34,17 @@ export const ReviewSection = ({ movieId, user }) => {
             <ReviewCard key={review.id} review={review} currentUserIsAuthor={currentUserIsAuthor(review.authorUid)} />
           ))
         ) : (
-          // TODO: Once review posting is implemented, add a link here for the user to post one
-          <Typography variant='subtitle1' sx={{ textAlign: 'center', fontSize: '1em' }}>
-            This movie has no reviews, you should write one!
-          </Typography>
+          <>
+            <Stack>
+              <Typography variant='subtitle1' sx={{ textAlign: 'center', fontSize: '1em' }}>
+                This movie doesn't have any reviews yet.
+              </Typography>
+              {/*// TODO: Make this button work*/}
+              <Box textAlign='center'>
+                <Button style={{ maxWidth: '100px' }}>Write one!</Button>
+              </Box>
+            </Stack>
+          </>
         )
       ) : (
         <></>
