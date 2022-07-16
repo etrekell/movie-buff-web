@@ -8,6 +8,7 @@ import { ReviewFormDialog } from './ReviewFormDialog';
 
 export const ReviewSection = ({ movieId, movieTitle, user }) => {
   // TODO: Make sure to do a status based component approach (Already have seen it where they don't load)
+  // TODO: Listen for firestore updates and automatically refresh them (Look at firebase docs, theres a way to do this)
 
   const { data, run, isLoading, isIdle, isSuccess, error } = useAsync();
   const [showDialog, setShowDialog] = useState('none');
