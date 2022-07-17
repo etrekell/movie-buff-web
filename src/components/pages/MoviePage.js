@@ -121,7 +121,7 @@ export const MoviePage = ({ user }) => {
                 <MovieCast movieId={movieId} />
               </Grid>
               <Grid item xs={12}>
-                <ReviewSection user={user} movieInfo={movieInfo} />
+                <ReviewSection user={user} movieInfo={movieInfo} movieTitle={movieTitle} movieId={movieId} />
               </Grid>
             </Grid>
           </Paper>
