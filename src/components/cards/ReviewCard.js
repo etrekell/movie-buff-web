@@ -6,10 +6,10 @@ import { useAsync } from '../../utilities/hooks/useAsync';
 import { SmallAvatar } from '../SmallAvatar';
 import { ReviewActionButtonGroup } from '../ReviewActionButtonGroup';
 
-export const ReviewCard = ({ review, currentUserIsAuthor, userId, movieTitle }) => {
+export const ReviewCard = ({ review, userId, movieTitle }) => {
   //TODO: finish this
   //TODO: Figure out the date stuff for createdOn and editedOn
-  const { authorUid, content = '', createdOn, editedOn } = review;
+  const { authorUid, content = '', createdOn, editedOn, currentUserIsAuthor } = review;
   const { data, run, isLoading, isIdle, isSuccess, error } = useAsync();
   const authorInfoPlaceHolder = {
     displayName: '',

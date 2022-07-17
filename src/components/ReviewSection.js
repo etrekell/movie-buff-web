@@ -13,13 +13,7 @@ export const ReviewSection = ({ movieId, movieTitle, user, movieInfo }) => {
       </Divider>
       {movieInfo.reviews.length ? (
         movieInfo.reviews.map((review) => (
-          <ReviewCard
-            key={review.id}
-            review={review}
-            currentUserIsAuthor={review.currentUserIsAuthor}
-            userId={user.uid}
-            movieTitle={movieTitle}
-          />
+          <ReviewCard key={review.id} review={review} userId={user.uid} movieTitle={movieTitle} />
         ))
       ) : (
         <>
