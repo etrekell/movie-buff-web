@@ -9,6 +9,8 @@ import { getMovieStatusVerbiage } from '../../utilities/movieStatusUtil';
 import { MovieCast } from '../MovieCast';
 import { ReviewSection } from '../ReviewSection';
 import { MovieActionButtonGroup } from '../MovieActionButtonGroup';
+import { collection, getDocs, query, where } from 'firebase/firestore';
+import { db } from '../../firebaseConfig';
 
 const movieInfoPlaceHolder = {
   title: '',
@@ -21,10 +23,36 @@ export const MoviePage = ({ user }) => {
   // This allows us to pull the query params from the url out into variables
   const { movieId } = useParams();
   const tmdbMoviePath = `${process.env.REACT_APP_TMDB_API_BASE_URL}/movie/${movieId}?api_key=${process.env.REACT_APP_TMDB_API_KEY}`;
+  const movieReviewQuery = query(collection(db, 'movie-reviews'), where('movieId', '==', movieId));
+  const currentUserIsAuthor = (authorUid) => authorUid === user.uid;
+
+  const getSortedReviews = (reviewData) => {
+    return (
+      reviewData.docs
+        .map((doc) => ({ ...doc.data(), id: doc.id }))
+        // Puts current users reviews at the top
+        .sort((r) => (currentUserIsAuthor(r.authorUid) ? -1 : 1))
+    );
+  };
+
+  const getMovieInfo = () => {
+    return new Promise((resolve, reject) => {
+      customFetch(tmdbMoviePath)
+        .then((info) => {
+          getDocs(movieReviewQuery).then((reviewData) => {
+            const reviews = getSortedReviews(reviewData);
+            resolve({ ...info, reviews });
+          });
+        })
+        .catch((reason) => {
+          reject(reason);
+        });
+    });
+  };
 
   useEffect(() => {
-    run(customFetch(tmdbMoviePath));
-  }, [run, tmdbMoviePath]);
+    run(getMovieInfo());
+  }, [run]);
 
   const movieStatusVerbiage = data ? getMovieStatusVerbiage(data) : '';
   const poster = data?.poster_path ? `https://image.tmdb.org/t/p/w300${data.poster_path}` : noPosterAvail;
