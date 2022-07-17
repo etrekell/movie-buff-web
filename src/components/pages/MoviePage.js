@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { Box, Grid, Typography, Paper } from '@mui/material';
+import { Box, Grid, Paper, Typography } from '@mui/material';
 import { FullPageLoadingSpinner, SomethingsWrongError } from '../lib';
 import { useParams } from 'react-router-dom';
 import { useAsync } from '../../utilities/hooks/useAsync';
@@ -19,7 +19,9 @@ const movieInfoPlaceHolder = {
 };
 
 export const MoviePage = ({ user }) => {
-  const { run, data, error, isLoading, isSuccess, isIdle } = useAsync();
+  // TODO: Listen for firestore updates and automatically refresh them (Look at firebase docs, theres a way to do this)
+
+  const { run, data: movieInfo, error, isLoading, isSuccess, isIdle } = useAsync();
   // This allows us to pull the query params from the url out into variables
   const { movieId } = useParams();
   const tmdbMoviePath = `${process.env.REACT_APP_TMDB_API_BASE_URL}/movie/${movieId}?api_key=${process.env.REACT_APP_TMDB_API_KEY}`;
@@ -29,9 +31,10 @@ export const MoviePage = ({ user }) => {
   const getSortedReviews = (reviewData) => {
     return (
       reviewData.docs
-        .map((doc) => ({ ...doc.data(), id: doc.id }))
+        // pulls out review object and adds currentUserIsAuthor and id properties
+        .map((doc) => ({ ...doc.data(), currentUserIsAuthor: currentUserIsAuthor(doc.data().authorUid), id: doc.id }))
         // Puts current users reviews at the top
-        .sort((r) => (currentUserIsAuthor(r.authorUid) ? -1 : 1))
+        .sort((r) => (r.currentUserIsAuthor ? -1 : 1))
     );
   };
 
@@ -41,6 +44,7 @@ export const MoviePage = ({ user }) => {
         .then((info) => {
           getDocs(movieReviewQuery).then((reviewData) => {
             const reviews = getSortedReviews(reviewData);
+            // Combines the data from tmdb and the reviews from firestore
             resolve({ ...info, reviews });
           });
         })
@@ -54,9 +58,9 @@ export const MoviePage = ({ user }) => {
     run(getMovieInfo());
   }, [run]);
 
-  const movieStatusVerbiage = data ? getMovieStatusVerbiage(data) : '';
-  const poster = data?.poster_path ? `https://image.tmdb.org/t/p/w300${data.poster_path}` : noPosterAvail;
-  const { title, tagline: tagLine, overview } = data ?? movieInfoPlaceHolder;
+  const movieStatusVerbiage = movieInfo ? getMovieStatusVerbiage(movieInfo) : '';
+  const poster = movieInfo?.poster_path ? `https://image.tmdb.org/t/p/w300${movieInfo.poster_path}` : noPosterAvail;
+  const { title: movieTitle, tagline: tagLine, overview } = movieInfo ?? movieInfoPlaceHolder;
 
   const moviePageStyle = {
     position: 'absolute',
@@ -78,7 +82,7 @@ export const MoviePage = ({ user }) => {
               <Grid item xs={12}>
                 <Grid container>
                   <Grid item sm={4} xs={12}>
-                    <Box component='img' alt={`${title} poster`} src={poster} width='100%' />
+                    <Box component='img' alt={`${movieTitle} poster`} src={poster} width='100%' />
                     <Typography variant='subtitle1' sx={{ textAlign: 'center', fontSize: '1em', fontStyle: 'italic' }}>
                       {tagLine ? `"${tagLine}"` : ''}
                     </Typography>
@@ -87,7 +91,7 @@ export const MoviePage = ({ user }) => {
                     <Grid container>
                       <Grid item xs={9}>
                         <Typography variant='h3' pl={1.5}>
-                          {title}
+                          {movieTitle}
                         </Typography>
                       </Grid>
                       <Grid
@@ -97,7 +101,7 @@ export const MoviePage = ({ user }) => {
                           flexDirection: 'column',
                           alignItems: 'end',
                         }}>
-                        <MovieActionButtonGroup movieTitle={title} movieId={movieId} userUid={user.uid} />
+                        <MovieActionButtonGroup movieTitle={movieTitle} movieId={movieId} userUid={user.uid} />
                       </Grid>
                     </Grid>
                     <Grid item xs={12}>
@@ -117,7 +121,7 @@ export const MoviePage = ({ user }) => {
                 <MovieCast movieId={movieId} />
               </Grid>
               <Grid item xs={12}>
-                <ReviewSection movieId={movieId} movieTitle={title} user={user} />
+                <ReviewSection user={user} movieInfo={movieInfo} />
               </Grid>
             </Grid>
           </Paper>
