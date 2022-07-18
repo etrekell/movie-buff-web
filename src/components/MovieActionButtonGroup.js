@@ -7,6 +7,7 @@ import { ReviewFormDialog } from './ReviewFormDialog';
 
 export const MovieActionButtonGroup = ({ userUid, movieInfo }) => {
   const [showDialog, setShowDialog] = useState('none');
+  const existingReview = movieInfo.reviews.find((review) => review.currentUserIsAuthor);
 
   return (
     <>
@@ -34,6 +35,7 @@ export const MovieActionButtonGroup = ({ userUid, movieInfo }) => {
         setShowDialog={setShowDialog}
         userUid={userUid}
         movieInfo={movieInfo}
+        existingReview={existingReview?.content}
       />
     </>
   );

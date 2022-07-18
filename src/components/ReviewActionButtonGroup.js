@@ -8,7 +8,7 @@ import { useAsync } from '../utilities/hooks/useAsync';
 import { doc, deleteDoc } from 'firebase/firestore';
 import { db } from '../firebaseConfig';
 
-export const ReviewActionButtonGroup = ({ userUid, movieInfo }) => {
+export const ReviewActionButtonGroup = ({ userUid, movieInfo, existingReview }) => {
   const [showDialog, setShowDialog] = useState('none');
   const { run } = useAsync();
 
@@ -51,6 +51,7 @@ export const ReviewActionButtonGroup = ({ userUid, movieInfo }) => {
         setShowDialog={setShowDialog}
         userUid={userUid}
         movieInfo={movieInfo}
+        existingReview={existingReview}
       />
     </>
   );
