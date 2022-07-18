@@ -5,7 +5,7 @@ import PlaylistAddCheckOutlinedIcon from '@mui/icons-material/PlaylistAddCheckOu
 import CreateOutlinedIcon from '@mui/icons-material/CreateOutlined';
 import { ReviewFormDialog } from './ReviewFormDialog';
 
-export const MovieActionButtonGroup = ({ movieTitle, movieId, userUid }) => {
+export const MovieActionButtonGroup = ({ movieId, userUid, movieInfo }) => {
   const [showDialog, setShowDialog] = useState('none');
 
   return (
@@ -32,9 +32,9 @@ export const MovieActionButtonGroup = ({ movieTitle, movieId, userUid }) => {
       <ReviewFormDialog
         showDialog={showDialog === 'review'}
         setShowDialog={setShowDialog}
-        movieTitle={movieTitle}
         movieId={movieId}
         userUid={userUid}
+        movieInfo={movieInfo}
       />
     </>
   );

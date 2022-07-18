@@ -6,7 +6,7 @@ import { useAsync } from '../../utilities/hooks/useAsync';
 import { SmallAvatar } from '../SmallAvatar';
 import { ReviewActionButtonGroup } from '../ReviewActionButtonGroup';
 
-export const ReviewCard = ({ review, userId, movieTitle }) => {
+export const ReviewCard = ({ review, userId, movieInfo }) => {
   //TODO: finish this
   //TODO: Figure out the date stuff for createdOn and editedOn
   const { authorUid, content = '', createdOn, editedOn, currentUserIsAuthor } = review;
@@ -41,7 +41,7 @@ export const ReviewCard = ({ review, userId, movieTitle }) => {
                 </Typography>
               </Stack>
               {currentUserIsAuthor ? (
-                <ReviewActionButtonGroup userUid={userId} movieTitle={movieTitle} movieId={review.movieId} />
+                <ReviewActionButtonGroup userUid={userId} movieId={review.movieId} movieInfo={movieInfo} />
               ) : (
                 <></>
               )}

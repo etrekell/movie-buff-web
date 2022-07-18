@@ -3,7 +3,7 @@ import { Box, Button, Divider, Stack, Typography } from '@mui/material';
 import { ReviewCard } from './cards/ReviewCard';
 import { ReviewFormDialog } from './ReviewFormDialog';
 
-export const ReviewSection = ({ movieId, movieTitle, user, movieInfo }) => {
+export const ReviewSection = ({ movieId, user, movieInfo }) => {
   const [showDialog, setShowDialog] = useState('none');
 
   return (
@@ -13,7 +13,7 @@ export const ReviewSection = ({ movieId, movieTitle, user, movieInfo }) => {
       </Divider>
       {movieInfo.reviews.length ? (
         movieInfo.reviews.map((review) => (
-          <ReviewCard key={review.id} review={review} userId={user.uid} movieTitle={movieTitle} />
+          <ReviewCard key={review.id} review={review} userId={user.uid} movieInfo={movieInfo} />
         ))
       ) : (
         <>
@@ -32,9 +32,9 @@ export const ReviewSection = ({ movieId, movieTitle, user, movieInfo }) => {
       <ReviewFormDialog
         showDialog={showDialog === 'review'}
         setShowDialog={setShowDialog}
-        movieTitle={movieTitle}
         movieId={movieId}
         userUid={user.uid}
+        movieInfo={movieInfo}
       />
     </>
   );
