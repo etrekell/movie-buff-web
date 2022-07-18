@@ -4,7 +4,7 @@ import { doc, setDoc } from 'firebase/firestore';
 import { db } from '../firebaseConfig';
 import { useAsync } from '../utilities/hooks/useAsync';
 
-export const ReviewFormDialog = ({ showDialog, setShowDialog, movieId, userUid, movieInfo }) => {
+export const ReviewFormDialog = ({ showDialog, setShowDialog, userUid, movieInfo }) => {
   // TODO: If user has left a review for this movie before, ask them if they want to edit it
   // TODO: Once we implement the user context, we should be able to use that for the userUid
   // TODO: This is for adding to the array(s): https://firebase.google.com/docs/firestore/manage-data/add-data#update_elements_in_an_array
@@ -19,11 +19,11 @@ export const ReviewFormDialog = ({ showDialog, setShowDialog, movieId, userUid, 
       content: e.target.reviewContent.value,
       createdOn: '',
       modifiedOn: '',
-      movieId: movieId,
+      movieId: movieInfo.id,
     };
 
     // This is the format I'm using for a review document id
-    const reviewDocumentId = `${userUid}-${movieId}`;
+    const reviewDocumentId = `${userUid}-${movieInfo.id}`;
     run(setDoc(doc(db, 'movie-reviews', reviewDocumentId), reviewData));
     setShowDialog('none');
   };

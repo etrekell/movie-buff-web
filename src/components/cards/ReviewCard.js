@@ -40,11 +40,7 @@ export const ReviewCard = ({ review, userId, movieInfo }) => {
                   {currentUserIsAuthor ? 'You' : authorInfo.displayName ?? ''}
                 </Typography>
               </Stack>
-              {currentUserIsAuthor ? (
-                <ReviewActionButtonGroup userUid={userId} movieId={review.movieId} movieInfo={movieInfo} />
-              ) : (
-                <></>
-              )}
+              {currentUserIsAuthor ? <ReviewActionButtonGroup userUid={userId} movieInfo={movieInfo} /> : <></>}
             </Stack>
             <Typography variant='subtitle2' component='div' color='text.secondary'>
               Reviewed on Review date here

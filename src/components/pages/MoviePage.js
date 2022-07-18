@@ -43,7 +43,7 @@ export const MoviePage = ({ user }) => {
           getDocs(movieReviewQuery).then((reviewData) => {
             const reviews = getSortedReviews(reviewData);
             // Combines the data from tmdb and the reviews from firestore
-            resolve({ ...info, reviews });
+            resolve({ ...info, reviews, id: info.id.toString() });
           });
         })
         .catch((reason) => {
@@ -99,7 +99,7 @@ export const MoviePage = ({ user }) => {
                           flexDirection: 'column',
                           alignItems: 'end',
                         }}>
-                        <MovieActionButtonGroup movieId={movieId} userUid={user.uid} movieInfo={movieInfo} />
+                        <MovieActionButtonGroup userUid={user.uid} movieInfo={movieInfo} />
                       </Grid>
                     </Grid>
                     <Grid item xs={12}>
@@ -116,10 +116,10 @@ export const MoviePage = ({ user }) => {
                 </Grid>
               </Grid>
               <Grid item xs={12}>
-                <MovieCast movieId={movieId} />
+                <MovieCast movieId={movieInfo.id} />
               </Grid>
               <Grid item xs={12}>
-                <ReviewSection user={user} movieInfo={movieInfo} movieTitle={movieTitle} movieId={movieId} />
+                <ReviewSection user={user} movieInfo={movieInfo} movieTitle={movieTitle} />
               </Grid>
             </Grid>
           </Paper>

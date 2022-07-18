@@ -8,7 +8,7 @@ import { useAsync } from '../utilities/hooks/useAsync';
 import { doc, deleteDoc } from 'firebase/firestore';
 import { db } from '../firebaseConfig';
 
-export const ReviewActionButtonGroup = ({ movieId, userUid, movieInfo }) => {
+export const ReviewActionButtonGroup = ({ userUid, movieInfo }) => {
   const [showDialog, setShowDialog] = useState('none');
   const { run } = useAsync();
 
@@ -17,7 +17,7 @@ export const ReviewActionButtonGroup = ({ movieId, userUid, movieInfo }) => {
 
   const handleReviewDelete = () => {
     // This is the format I'm using for a review document id
-    const reviewDocumentId = `${userUid}-${movieId}`;
+    const reviewDocumentId = `${userUid}-${movieInfo.id}`;
     run(deleteDoc(doc(db, 'movie-reviews', reviewDocumentId)));
   };
 
@@ -49,7 +49,6 @@ export const ReviewActionButtonGroup = ({ movieId, userUid, movieInfo }) => {
       <ReviewFormDialog
         showDialog={showDialog === 'review'}
         setShowDialog={setShowDialog}
-        movieId={movieId}
         userUid={userUid}
         movieInfo={movieInfo}
       />
