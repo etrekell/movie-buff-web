@@ -12,31 +12,29 @@ import { MovieActionButtonGroup } from '../MovieActionButtonGroup';
 import { collection, getDocs, query, where } from 'firebase/firestore';
 import { db } from '../../firebaseConfig';
 
-const movieInfoPlaceHolder = {
-  title: '',
-  tagLine: '',
-  overview: '',
-};
-
 export const MoviePage = ({ user }) => {
   // TODO: Listen for firestore updates and automatically refresh them (Look at firebase docs, theres a way to do this)
-
-  const { run, data: movieInfo, error, isLoading, isSuccess, isIdle } = useAsync();
   // This allows us to pull the query params from the url out into variables
   const { movieId } = useParams();
+  const movieInfoPlaceHolder = {
+    title: 'Title Unknown',
+    tagLine: '',
+    overview: '',
+    status: '',
+    release_date: '',
+    id: movieId,
+  };
+  const { run, data: movieInfo, error, isLoading, isSuccess, isIdle } = useAsync(movieInfoPlaceHolder);
   const tmdbMoviePath = `${process.env.REACT_APP_TMDB_API_BASE_URL}/movie/${movieId}?api_key=${process.env.REACT_APP_TMDB_API_KEY}`;
   const movieReviewQuery = query(collection(db, 'movie-reviews'), where('movieId', '==', movieId));
   const currentUserIsAuthor = (authorUid) => authorUid === user.uid;
 
-  const getSortedReviews = (reviewData) => {
-    return (
-      reviewData.docs
-        // pulls out review object and adds currentUserIsAuthor and id properties
-        .map((doc) => ({ ...doc.data(), currentUserIsAuthor: currentUserIsAuthor(doc.data().authorUid), id: doc.id }))
-        // Puts current users reviews at the top
-        .sort((r) => (r.currentUserIsAuthor ? -1 : 1))
-    );
-  };
+  const getSortedReviews = (reviewData) =>
+    reviewData.docs
+      // pulls out review object and adds currentUserIsAuthor and id properties
+      .map((doc) => ({ ...doc.data(), currentUserIsAuthor: currentUserIsAuthor(doc.data().authorUid), id: doc.id }))
+      // Puts current users reviews at the top
+      .sort((r) => (r.currentUserIsAuthor ? -1 : 1));
 
   const getMovieInfo = () => {
     return new Promise((resolve, reject) => {
@@ -58,9 +56,9 @@ export const MoviePage = ({ user }) => {
     run(getMovieInfo());
   }, [run]);
 
-  const movieStatusVerbiage = movieInfo ? getMovieStatusVerbiage(movieInfo) : '';
-  const poster = movieInfo?.poster_path ? `https://image.tmdb.org/t/p/w300${movieInfo.poster_path}` : noPosterAvail;
-  const { title: movieTitle, tagline: tagLine, overview } = movieInfo ?? movieInfoPlaceHolder;
+  const movieStatusVerbiage = getMovieStatusVerbiage(movieInfo);
+  const poster = movieInfo.poster_path ? `https://image.tmdb.org/t/p/w300${movieInfo.poster_path}` : noPosterAvail;
+  const { title: movieTitle, tagline: tagLine, overview } = movieInfo;
 
   const moviePageStyle = {
     position: 'absolute',
@@ -101,7 +99,12 @@ export const MoviePage = ({ user }) => {
                           flexDirection: 'column',
                           alignItems: 'end',
                         }}>
-                        <MovieActionButtonGroup movieTitle={movieTitle} movieId={movieId} userUid={user.uid} />
+                        <MovieActionButtonGroup
+                          movieTitle={movieTitle}
+                          movieId={movieId}
+                          userUid={user.uid}
+                          movieInfo={movieInfo}
+                        />
                       </Grid>
                     </Grid>
                     <Grid item xs={12}>
