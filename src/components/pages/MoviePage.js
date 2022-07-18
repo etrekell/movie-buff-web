@@ -57,8 +57,8 @@ export const MoviePage = ({ user }) => {
   }, [run]);
 
   const movieStatusVerbiage = getMovieStatusVerbiage(movieInfo);
-  const poster = movieInfo.poster_path ? `https://image.tmdb.org/t/p/w300${movieInfo.poster_path}` : noPosterAvail;
-  const { title: movieTitle, tagline: tagLine, overview } = movieInfo;
+  const { title: movieTitle, tagline: tagLine, overview, poster_path: posterPath } = movieInfo;
+  const poster = posterPath ? `https://image.tmdb.org/t/p/w300${posterPath}` : noPosterAvail;
 
   const moviePageStyle = {
     position: 'absolute',
