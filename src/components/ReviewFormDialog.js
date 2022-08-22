@@ -3,7 +3,6 @@ import { Button, Dialog, DialogActions, DialogContent, DialogTitle, TextField, T
 import { doc, setDoc } from 'firebase/firestore';
 import { db } from '../firebaseConfig';
 import { useAsync } from '../utilities/hooks/useAsync';
-import { getTimestamp } from '../utilities/getTimestamp';
 
 export const ReviewFormDialog = ({ showDialog, setShowDialog, userUid, movieInfo, existingReview }) => {
   // TODO: If user has left a review for this movie before, ask them if they want to edit it
@@ -18,12 +17,13 @@ export const ReviewFormDialog = ({ showDialog, setShowDialog, userUid, movieInfo
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    const timeStamp = Date.now();
 
     const reviewData = {
       authorUid: userUid,
       content: value,
-      createdOn: existingReview ? '' : getTimestamp(),
-      modifiedOn: existingReview ? getTimestamp() : '',
+      createdOn: existingReview ? '' : timeStamp,
+      modifiedOn: existingReview ? timeStamp : '',
       movieId: movieInfo.id,
     };
 
