@@ -41,7 +41,11 @@ export const ReviewCard = ({ review, userId, movieInfo }) => {
                 </Typography>
               </Stack>
               {currentUserIsAuthor ? (
-                <ReviewActionButtonGroup userUid={userId} movieInfo={movieInfo} existingReview={content} />
+                <ReviewActionButtonGroup
+                  userUid={userId}
+                  movieInfo={movieInfo}
+                  existingReview={{ content, createdOn }}
+                />
               ) : (
                 <></>
               )}

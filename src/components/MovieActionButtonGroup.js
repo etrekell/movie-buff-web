@@ -35,7 +35,7 @@ export const MovieActionButtonGroup = ({ userUid, movieInfo }) => {
         setShowDialog={setShowDialog}
         userUid={userUid}
         movieInfo={movieInfo}
-        existingReview={existingReview?.content}
+        existingReview={existingReview}
       />
     </>
   );

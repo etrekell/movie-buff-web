@@ -10,7 +10,8 @@ export const ReviewFormDialog = ({ showDialog, setShowDialog, userUid, movieInfo
   // TODO: This is for adding to the array(s): https://firebase.google.com/docs/firestore/manage-data/add-data#update_elements_in_an_array
   // TODO: Need render based on async status? - Maybe have a "toast" type message that says if it was posted or not, mui has something like this
   const { run } = useAsync();
-  const [value, setValue] = React.useState(existingReview);
+  const [value, setValue] = React.useState(existingReview?.content ?? '');
+
   const handleChange = (e) => {
     setValue(e.target.value);
   };
@@ -22,8 +23,8 @@ export const ReviewFormDialog = ({ showDialog, setShowDialog, userUid, movieInfo
     const reviewData = {
       authorUid: userUid,
       content: value,
-      createdOn: existingReview ? '' : timeStamp,
-      modifiedOn: existingReview ? timeStamp : '',
+      createdOn: existingReview ? existingReview.createdOn : timeStamp,
+      editedOn: existingReview ? timeStamp : '',
       movieId: movieInfo.id,
     };
 
