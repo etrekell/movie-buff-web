@@ -21,7 +21,8 @@ export const MuiMenuTest = () => {
         onClick={handleClick}
         aria-controls={open ? 'resources-menu' : undefined}
         aria-haspopup={open ? 'true' : undefined}
-        endIcon={<KeyboardArrowDown />}>
+        endIcon={<KeyboardArrowDown />}
+      >
         Resources
       </Button>
       <Menu
@@ -37,7 +38,8 @@ export const MuiMenuTest = () => {
         transformOrigin={{
           vertical: 'top',
           horizontal: 'right',
-        }}>
+        }}
+      >
         <MenuItem onClick={handleClose}>Blog</MenuItem>
         <MenuItem onClick={handleClose}>Podcast</MenuItem>
       </Menu>

@@ -16,7 +16,8 @@ export const MovieInfoCard = ({ movieTitle, overview, posterPath, id, releaseDat
           flexDirection: 'row',
           p: 1,
           width: '600px',
-        }}>
+        }}
+      >
         <CardMedia component='img' image={poster} alt={posterAlt} sx={{ width: '300px', height: '100%' }} />
         <CardContent>
           <Stack direction={'column'} spacing={1}>

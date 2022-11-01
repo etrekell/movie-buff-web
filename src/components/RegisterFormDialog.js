@@ -66,7 +66,8 @@ export const RegisterFormDialog = ({ showDialog, setShowDialog, onSubmit }) => {
                   <IconButton
                     aria-label='toggle password visibility'
                     onClick={() => setShowPassword((prevState) => !prevState)}
-                    edge='end'>
+                    edge='end'
+                  >
                     {showPassword ? <VisibilityOff /> : <Visibility />}
                   </IconButton>
                 </InputAdornment>

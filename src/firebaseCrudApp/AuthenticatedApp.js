@@ -67,14 +67,16 @@ export const AuthenticatedApp = () => {
               onClick={() => {
                 // Handle this promise
                 ageIncreaseHandler(person.id, person.age);
-              }}>
+              }}
+            >
               Increase age
             </button>
             <button
               onClick={() => {
                 // Handle this promise
                 deletePersonHandler(person.id);
-              }}>
+              }}
+            >
               X
             </button>
           </li>

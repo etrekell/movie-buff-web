@@ -86,7 +86,8 @@ export const UserMenu = ({ user, logout, login, register }) => {
         id='user-options-button'
         onClick={(event) => setAnchorElement(event.currentTarget)}
         aria-controls={open ? 'user-options-button' : undefined}
-        aria-haspopup={open ? 'true' : undefined}>
+        aria-haspopup={open ? 'true' : undefined}
+      >
         {/*// TODO: I think we should use the user info for the image here, because we have to use it like that for the review card and I don't want to be getting in in more than one place*/}
         <SmallAvatar displayName={user?.displayName} imageURL={user?.photoURL} />
       </Button>
@@ -103,7 +104,8 @@ export const UserMenu = ({ user, logout, login, register }) => {
         transformOrigin={{
           vertical: 'top',
           horizontal: 'center',
-        }}>
+        }}
+      >
         {user ? <LoggedInMenu /> : <LoggedOutMenu />}
       </Menu>
       <BasicDialog
